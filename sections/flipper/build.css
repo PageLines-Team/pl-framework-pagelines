@@ -1,0 +1,349 @@
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
+/** PAGELINES VARIABLES SINCE 3.0.0 */
+/* from old variables */
+/** Default Font */
+/**
+ * Add back the reset.css that is typical. Bootstrap only includes normalize css which in our case doesn't have large enough scope. 
+ * We dont want the browser to be adding random margins, padding, borders to start with.
+ */
+iframe {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+/**
+ * PageLines Mixins
+ */
+/** Standard Tag Text Styling */
+.pl-type-tag {
+  font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.pl-standard-title {
+  font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.navbar-inverse .badge {
+  background-color: #fff;
+  color: #2780e3;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+}
+.text-primary,
+.text-primary:hover {
+  color: #2780e3;
+}
+.text-success,
+.text-success:hover {
+  color: #3fb618;
+}
+.text-danger,
+.text-danger:hover {
+  color: #ff0039;
+}
+.text-warning,
+.text-warning:hover {
+  color: #ff7518;
+}
+.text-info,
+.text-info:hover {
+  color: #9954bb;
+}
+table a:not(.btn),
+.table a:not(.btn) {
+  text-decoration: underline;
+}
+table .success,
+.table .success,
+table .warning,
+.table .warning,
+table .danger,
+.table .danger,
+table .info,
+.table .info {
+  color: #fff;
+}
+table .success a,
+.table .success a,
+table .warning a,
+.table .warning a,
+table .danger a,
+.table .danger a,
+table .info a,
+.table .info a {
+  color: #fff;
+}
+.has-warning .help-block,
+.has-warning .control-label,
+.has-warning .form-control-feedback {
+  color: #ff7518;
+}
+.has-warning .form-control,
+.has-warning .form-control:focus,
+.has-warning .input-group-addon {
+  border: 1px solid #ff7518;
+}
+.has-error .help-block,
+.has-error .control-label,
+.has-error .form-control-feedback {
+  color: #ff0039;
+}
+.has-error .form-control,
+.has-error .form-control:focus,
+.has-error .input-group-addon {
+  border: 1px solid #ff0039;
+}
+.has-success .help-block,
+.has-success .control-label,
+.has-success .form-control-feedback {
+  color: #3fb618;
+}
+.has-success .form-control,
+.has-success .form-control:focus,
+.has-success .input-group-addon {
+  border: 1px solid #3fb618;
+}
+.nav-pills > li > a {
+  border-radius: 0;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background-image: none;
+}
+.close {
+  text-decoration: none;
+  text-shadow: none;
+  opacity: 0.4;
+}
+.close:hover,
+.close:focus {
+  opacity: 1;
+}
+.alert {
+  border: none;
+}
+.alert .alert-link {
+  text-decoration: underline;
+  color: #fff;
+}
+.label {
+  border-radius: 0;
+}
+.progress {
+  height: 8px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.progress .progress-bar {
+  font-size: 8px;
+  line-height: 8px;
+}
+.panel-heading,
+.panel-footer {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.panel-default .close {
+  color: #333333;
+}
+.modal .close {
+  color: #333333;
+}
+.popover {
+  color: #333333;
+}
+.flipper-heading {
+  z-index: 100;
+  position: relative;
+  margin: 7px 0;
+  min-height: 23px;
+  line-height: 20px;
+}
+.flipper-heading .flipper-title {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-top: 5px;
+}
+.flipper-heading .flipper-next,
+.flipper-heading .flipper-prev {
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  margin-left: 5px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 1px;
+}
+.flipper-heading .flipper-prev {
+  right: 25px;
+}
+.pl-area.section-flipper {
+  overflow: hidden;
+}
+.pl-area.section-flipper .flipper-heading-wrap {
+  /*  */
+  margin: 0 10px;
+  position: relative;
+}
+.pl-area.section-flipper .flipper-items .flipper-meta {
+  padding: 15px;
+}
+.section-flipper .pl-section-pad {
+  padding: 15px 0;
+  overflow: hidden;
+  position: relative;
+}
+.flipper-wrap {
+  position: relative;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.flipper-wrap .flipper {
+  opacity: 0;
+  max-height: 400px;
+  transition: opacity .3s;
+}
+.flipper-wrap .flipper.flipper-loaded {
+  opacity: 1;
+  max-height: none;
+}
+.flipper-wrap .flipper-items {
+  overflow: hidden;
+}
+.flipper-wrap .flipper-items > li {
+  position: relative;
+  display: block;
+  float: left;
+}
+.flipper-wrap .flipper-items > li h3 {
+  position: relative;
+  top: 0px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.flipper-wrap .flipper-items > li img {
+  width: 100%;
+  display: block;
+  float: left;
+  margin-bottom: 0px;
+}
+.flipper-wrap .flipper-items.layout-grid li {
+  margin: 0px 10px 0px 10px;
+}
+.flipper-wrap .flipper-items.layout-masonry li {
+  margin: 0px;
+}
+.flipper-wrap .flipper-items .flipper-item {
+  position: relative;
+}
+.flipper-wrap .flipper-items .flipper-item .flipper-info-bg {
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  transition: all 0.2s linear;
+}
+.flipper-wrap .flipper-items .flipper-item .flipper-info {
+  opacity: 0;
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  color: #fff;
+  transition: all 0.2s linear;
+}
+.flipper-wrap .flipper-items .flipper-item .flipper-info .info-text {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 9px 15px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.3em;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 3px;
+  transition: all 0.1s linear;
+}
+.flipper-wrap .flipper-items .flipper-item .flipper-info .info-text:hover {
+  opacity: 0.8;
+}
+.flipper-wrap .flipper-items .flipper-item .flipper-info .view,
+.flipper-wrap .flipper-items .flipper-item .flipper-info .image,
+.flipper-wrap .flipper-items .flipper-item .flipper-info .video {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  text-indent: -9999px;
+  color: #fff;
+  display: block;
+}
+.flipper-wrap .flipper-items .flipper-item .flipper-info span {
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  display: block;
+  height: 42px;
+  width: 42px;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.8;
+  transition: all 0.2s linear;
+}
+.flipper-wrap .flipper-items .flipper-item .flipper-info .pl-center {
+  transition: all 0.2s linear;
+  text-align: center;
+  margin-top: 60px;
+}
+.flipper-wrap .flipper-items .flipper-item .flipper-info .pl-center p {
+  padding-bottom: 0px;
+}
+.flipper-wrap .flipper-items .flipper-item:hover .flipper-info {
+  opacity: 1;
+}
+.flipper-wrap .flipper-items .flipper-item:hover .flipper-info .pl-center {
+  padding-top: 20px;
+}
+.flipper-wrap .flipper-items .flipper-item:hover .flipper-info-bg {
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.flipper-wrap .flipper-items .flipper-meta {
+  padding: 10px 0;
+  text-align: left;
+}
+.flipper-wrap .flipper-items .flipper-meta .pl-karma {
+  float: right;
+  margin-top: 4px;
+}
+.flipper-wrap .flipper-items .flipper-meta .flipper-post-title {
+  margin: 0;
+  line-height: 1.4em;
+}
+.flipper-wrap .flipper-items .flipper-meta .flipper-metabar {
+  opacity: .6;
+  font-size: 12px;
+}
+.flipper-wrap .flipper-items .flipper-excerpt {
+  opacity: .8;
+  font-size: 90%;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  margin-top: 1em;
+}
+.flipper-wrap .flipper-items .flipper-excerpt p {
+  margin: 1em 0;
+}

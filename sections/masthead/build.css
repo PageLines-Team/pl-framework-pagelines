@@ -1,0 +1,102 @@
+/* Jumbotrons
+-------------------------------------------------- */
+.masthead {
+  position: relative;
+}
+.masthead .inner {
+  padding-top: 2rem;
+}
+.masthead .splash {
+  margin: 0 auto;
+  text-align: center;
+}
+.masthead h1,
+.masthead p {
+  text-align: center;
+}
+.masthead .masthead-title {
+  margin: 0 0 20px;
+  font-size: 75px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.masthead .masthead-tag {
+  margin: 0;
+  margin-bottom: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 25px;
+  line-height: 1.3em;
+  opacity: .7;
+  font-weight: 300;
+}
+.masthead .download-info {
+  margin-bottom: 30px;
+}
+.masthead .download-info .btn {
+  margin: 0 8px;
+}
+.masthead .splash {
+  padding-top: 18px;
+}
+.masthead .splash img {
+  display: block;
+  margin: 0 auto;
+}
+.mastmeta {
+  color: inherit;
+  opacity: .7;
+}
+.subhead {
+  padding-bottom: 0;
+  margin-bottom: 9px;
+}
+.subhead h1 {
+  font-size: 54px;
+}
+.mastlinks {
+  margin: 36px 0;
+}
+/* Responsive
+ ************************/
+@media screen and (max-width: 980px) {
+  .masthead .masthead-title {
+    font-size: 72px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .masthead .inner {
+    padding-top: 18px;
+  }
+  .masthead .masthead-title {
+    font-size: 54px;
+  }
+  .masthead .masthead-tag {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .masthead .btn {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .masthead .inner {
+    padding-top: 10px;
+  }
+  .masthead .masthead-title {
+    font-size: 45px;
+    margin-right: 0;
+  }
+  .masthead .masthead-tag {
+    margin-right: 0;
+    margin-left: 0;
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .masthead .btn {
+    display: block;
+    font-size: 18px;
+    padding: 10px 14px;
+    margin: 0 auto 10px;
+  }
+}

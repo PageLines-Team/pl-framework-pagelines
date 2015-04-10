@@ -1,0 +1,118 @@
+/* PAGELINES STYLES */
+.revslider-container {
+  width: 100%;
+  position: relative;
+  padding: 0;
+  background: #111;
+  /* Text Sizing*/
+}
+.revslider-container .pl-slider {
+  opacity: 0;
+}
+.revslider-container .tparrows {
+  background: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  height: 60px;
+  width: 60px;
+  color: #fff;
+  font-size: 40px;
+  border-radius: 2px;
+}
+.revslider-container .tparrows:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  opacity: 1;
+}
+.revslider-container .tparrows i {
+  margin: 9px 0 0 1px;
+  display: block;
+}
+.revslider-container .tp-bullets.simplebullets.square .bullet {
+  background: transparent;
+  border: 1px solid #fff;
+  width: 8px;
+  height: 8px;
+  margin: 0 5px;
+  border-radius: 6px;
+}
+.revslider-container .tp-bullets.simplebullets.square .bullet.selected,
+.revslider-container .tp-bullets.simplebullets.square .bullet:hover {
+  background: #fff;
+}
+.revslider-container .text-center {
+  text-align: center;
+}
+.revslider-container h2.slider-text {
+  font-weight: 300;
+  color: #fff;
+  transition: all 0.3s linear;
+  margin-bottom: 15px;
+  font-weight: inherit;
+  margin: 0;
+  font-size: 60px;
+  line-height: 1.1em;
+}
+.revslider-container h2.slider-text .slide-title {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.revslider-container h2.slider-text .slide-desc {
+  display: block;
+  font-weight: inherit;
+  font-size: 24px;
+  line-height: 1.3em;
+  padding: 8px 0;
+}
+.revslider-container.element-dark .slider-text {
+  color: #000;
+}
+.revslider-container.element-dark .tparrows {
+  background: rgba(255, 255, 255, 0.4);
+  color: #000;
+}
+.revslider-container.element-dark .tparrows:hover {
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+}
+.revslider-container.element-dark .tp-bullets.simplebullets.square .bullet {
+  border: 1px solid #000;
+}
+.revslider-container.element-dark .tp-bullets.simplebullets.square .bullet.selected,
+.revslider-container.element-dark .tp-bullets.simplebullets.square .bullet:hover {
+  background: #000;
+}
+.revslider-container .slider-content.left-side {
+  text-align: left;
+}
+.revslider-container .slider-content.centered {
+  text-align: center;
+}
+.revslider-container .slider-content.right-side {
+  text-align: right;
+}
+.revslider-container .slider-content .slider-buttons {
+  padding-top: 25px;
+}
+.revslider-container .slider-content .slider-buttons a.slider-btn {
+  margin-right: 15px;
+}
+.revslider-container .slider-content .slider-buttons a.slider-btn:last-child {
+  margin-right: 0;
+}
+.revslider-container .tp-bannertimer {
+  z-index: 90;
+}
+@media (max-width: 767px) {
+  .revslider-container h2.slider-text {
+    font-size: 27px;
+    line-height: 1.1em;
+  }
+  .revslider-container h2.slider-text small {
+    font-size: 14px;
+  }
+  .revslider-container .slider-buttons .btn.btn-large {
+    padding: 4px 12px;
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+}

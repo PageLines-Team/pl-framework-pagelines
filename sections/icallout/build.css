@@ -1,0 +1,16 @@
+.section-icallout {
+  text-align: center;
+}
+.section-icallout .icallout-head {
+  margin: 0 0 12px;
+}
+.section-icallout .icallout-container.inline .icallout-head {
+  font-size: 37px;
+  line-height: 1em;
+}
+.section-icallout .icallout-container.inline .icallout-head,
+.section-icallout .icallout-container.inline .icallout-action {
+  display: inline-block;
+  margin: 10px 15px;
+  vertical-align: top;
+}

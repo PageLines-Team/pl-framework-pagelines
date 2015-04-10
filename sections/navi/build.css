@@ -1,0 +1,71 @@
+.pl-section.section-navi {
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+.pl-section.section-navi .pl-section-pad {
+  padding: 0;
+}
+.pl-section.section-navi .navi-nav {
+  display: inline-block;
+  vertical-align: top;
+}
+.pl-section.section-navi img {
+  max-height: 100%;
+}
+.pl-section.section-navi .nav-searchform,
+.pl-section.section-navi ul {
+  vertical-align: top;
+  font-size: 12px;
+}
+.pl-section.section-navi .navi-right {
+  float: right;
+}
+.pl-section.section-navi .navi-left {
+  float: left;
+}
+.pl-section.section-navi .navi-center {
+  display: inline-block;
+}
+.navi-wrap {
+  height: 50px;
+  position: relative;
+}
+.navi-container {
+  height: 50px;
+  padding: 7px;
+}
+.navi-search {
+  display: inline-block;
+}
+.navi-searchform {
+  height: 50px;
+  margin-bottom: 0;
+  position: relative;
+  display: inline-block;
+}
+.navi-searchform input {
+  border-radius: 0;
+  margin: 0;
+  border: none;
+  width: 0;
+  padding: 0;
+  background: transparent;
+  transition: width 0.5s ease-in-out;
+}
+.navi-searchform input:focus {
+  outline: none;
+}
+.navi-searchform.has-focus input {
+  width: 130px;
+}
+.navi-searchform .btn-search {
+  padding: 0 20px;
+  line-height: 50px;
+  display: inline-block;
+}
+@media screen and (max-width: 768px) {
+  .navi-searchform {
+    display: none;
+  }
+}
