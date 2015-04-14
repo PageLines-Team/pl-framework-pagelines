@@ -42,9 +42,11 @@ class PageLinesTextBox extends PageLinesSection {
 	}
 
 	function section_template(){
+
+		$textbox_title = ( $this->opt( 'textbox_title' ) ) ? $this->opt( 'textbox_title' ): '';
 ?>
 	<div class="textbox-wrap">
-		<h3 data-bind="visible: textbox_title, plsync: textbox_title"><?php $this->opt('textbox_title');?></h3>
+		<h3 data-bind="visible: textbox_title, plsync: textbox_title"><?php echo $textbox_title; ?></h3>
 		<div class="hentry" data-bind="plsync: textbox_content, sync_mode: 'autop'">
 			<?php echo do_shortcode( wpautop( $this->opt( 'textbox_content' ) ) ); ?>
 		</div>
