@@ -1,26 +1,21 @@
 <?php
 /*
 
-	Section: 		Showcase Featured Grid
-	Description: 	Display Showcase Featured Elements in a grid. 
+	Section: 		Hyper
+	Description: 	Displays Hype HTML5 Video. 
 
 	Author: 		PageLines
 	Author URI: 	http://www.pagelines.com
 	
-	Class Name: 	PLShowcaseFeaturedGrid
+	Class Name: 	PLHype
 	Filter: 		advanced
 
 */
 
 
-class PLShowcaseFeaturedGrid extends PageLinesSection {
+class PLHype extends PageLinesSection {
 
 	function section_persistent(){
-
-		//  add_filter('pl_binding_[id]', array( $this, '[function name]'), 10, 2); 
-
-		add_filter('pl_binding_showcase', array( $this, 'callback'), 10, 2); 
-
 
 	}
 
