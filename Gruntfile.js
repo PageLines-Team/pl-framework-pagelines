@@ -95,7 +95,7 @@ module.exports = function(grunt) {
     concurrent: {
         all: {
           //  tasks: ['watch:js', 'watch:less', 'watch:php'],
-            tasks: [ 'watch:lessMain', 'watch:lessSections', 'watch:liveReload'],
+            tasks: [ 'watch:lessMain', 'watch:lessSections'],
             options: {
                 logConcurrentOutput: true
             }
