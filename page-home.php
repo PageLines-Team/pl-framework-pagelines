@@ -35,7 +35,11 @@ $default_banner = array(
 
 $showcase_home_content = array(
 
-	'posts_count' 	=> 4
+	'post_type'			=> 'picasso-showcase',
+	'posts_total' 		=> '4',
+	'posts_meta_key'	=> 'featured',
+	'posts_meta_value'	=> '1'
+
 );
 
 $showcase_home_heading = array(
@@ -89,9 +93,9 @@ $framework_videobox = array(
 
 	'col'			=> 6,
 	'upload_video'	=> 'http://localhost/pagelines-ten/wp-content/uploads/2015/04/pagelines1.mp4',
-	'auto_play'		=> true,
-	'loop'			=> 1,
-	'controls'		=> 0,
+	'auto_play'		=> 'autoplay',
+	'loop'			=> 'loop',
+	'controls'		=> 'controls'
 
 );
 
@@ -99,9 +103,16 @@ $framework_home_cta = array(
 
 	'header' 				 => '',
 	'button_primary'		 => 'http://www.pagelines.com/showcase/',
-	'button_primary_text'	 => 'View Website Showcase',
+	'button_primary_text'	 => 'View Framework Demo',
 	'button_primary_style'	 => 'inverse'	
 );	
+
+$home_testimonials_heading = array(
+
+	'header' 				 => 'What People are Saying', 
+	'subheader' 			 => 'We have some of the happiest customers in the business...'
+
+);
 
 
 ?>
@@ -112,13 +123,13 @@ $framework_home_cta = array(
 
 </div>
 
-<div class="showcase_home">
+<div class="home_showcase">
 
 	<div class="pl-content">
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'e987654dfds', 'settings' => $showcase_home_heading ) ); ?>
 
-		<?php //echo pl_get_section( array('section' => 'showcasefeaturedgrid', 'id' => 'e6274564asdf', 'settings' => $showcase_home_content ) ); ?>
+		<?php echo pl_get_section( array('section' => 'pl-loopgrid', 'id' => 'e6274534asdf', 'settings' => $showcase_home_content ) ); ?>
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r18367475jkhg', 'settings' => $showcase_home_cta ) ); ?>
 
@@ -126,35 +137,32 @@ $framework_home_cta = array(
 
 </div>
 
-<div class="framework_home">
+<div class="home_framework">
 
 	<div class="pl-content">
+		<div class="row-flex">
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r234946484scsv', 'settings' => $framework_home_heading ) ); ?>
 
 		<?php echo pl_get_section( array('section' => 'boxes', 'id' => 'r94757673dho', 'settings' => $framework_boxes ) ); ?>
 
-		<?php //echo pl_get_section( array('section' => 'videobox', 'id' => 'r94757663dro', 'settings' => $framework_videobox) ); ?>
+		<?php echo pl_get_section( array('section' => 'pl-videobox', 'id' => 'r94757653dro', 'settings' => $framework_videobox) ); ?>
 
-		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r1836845jkhg', 'settings' => $framework_home_cta ) ); ?>
+		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r1835845jkhg', 'settings' => $framework_home_cta ) ); ?>
 
+		</div>
 	</div>
 
 </div>
 
-<?php //echo pl_get_section( array('section' => 'slider', 'id' => '424242') );?>
+<div class="home_testimonials">
 
-<?php //echo pl_get_section( array('section' => 'hero', 'id' => '2222223') );?>
+	<div class="pl-content">
+		<div class="row-flex">
 
-<?php //echo do_shortcode( '[plsection section="slider"]');?>
+		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r2349837484scsv', 'settings' => $home_testimonials_heading ) ); ?>
 
-
-<div  class="pl-content">
-	<div class="row-flex">
-		<div class="col-sm-4" data-bind="pltext: header_text">123</div>
-		<div class="col-sm-4">123</div>
-		<div class="col-sm-4">123</div>
+		</div>
 	</div>
+
 </div>
-
-
