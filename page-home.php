@@ -60,7 +60,7 @@ $framework_home_heading = array(
 
 );
 
-$framework_home_content_left = array(
+$framework_boxes = array(
 
 	'col'			=> 6,
 	'ibox_cols' 	=> 12,
@@ -85,9 +85,13 @@ $framework_home_content_left = array(
 
 );
 
-$framework_home_content_right = array(
+$framework_videobox = array(
 
-	'col'	=> 6,
+	'col'			=> 6,
+	'upload_video'	=> 'http://localhost/pagelines-ten/wp-content/uploads/2015/04/pagelines1.mp4',
+	'auto_play'		=> true,
+	'loop'			=> 1,
+	'controls'		=> 0,
 
 );
 
@@ -128,9 +132,9 @@ $framework_home_cta = array(
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r234946484scsv', 'settings' => $framework_home_heading ) ); ?>
 
-		<?php echo pl_get_section( array('section' => 'boxes', 'id' => 'r94757673dho', 'settings' => $framework_home_content_left ) ); ?>
+		<?php echo pl_get_section( array('section' => 'boxes', 'id' => 'r94757673dho', 'settings' => $framework_boxes ) ); ?>
 
-		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r94757663dro', 'settings' => $framework_home_content_right ) ); ?>
+		<?php echo pl_get_section( array('section' => 'videobox', 'id' => 'r94757663dro', 'settings' => $framework_videobox) ); ?>
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r1836845jkhg', 'settings' => $framework_home_cta ) ); ?>
 

@@ -49,10 +49,6 @@ class PLShowcaseFeaturedGrid extends PageLinesSection {
 		return $response;
 	}
 
-	function get_showcase(){
-
-	}
-
 	function get_featured_showcase( $value ) {
 		$args = array(
 	      'orderby' 		=> 'rand',
