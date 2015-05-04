@@ -118,7 +118,7 @@ $framework_home_cta = array(
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'e987654dfds', 'settings' => $showcase_home_heading ) ); ?>
 
-		<?php echo pl_get_section( array('section' => 'showcasefeaturedgrid', 'id' => 'e6274564asdf', 'settings' => $showcase_home_content ) ); ?>
+		<?php //echo pl_get_section( array('section' => 'showcasefeaturedgrid', 'id' => 'e6274564asdf', 'settings' => $showcase_home_content ) ); ?>
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r18367475jkhg', 'settings' => $showcase_home_cta ) ); ?>
 
@@ -134,7 +134,7 @@ $framework_home_cta = array(
 
 		<?php echo pl_get_section( array('section' => 'boxes', 'id' => 'r94757673dho', 'settings' => $framework_boxes ) ); ?>
 
-		<?php echo pl_get_section( array('section' => 'videobox', 'id' => 'r94757663dro', 'settings' => $framework_videobox) ); ?>
+		<?php //echo pl_get_section( array('section' => 'videobox', 'id' => 'r94757663dro', 'settings' => $framework_videobox) ); ?>
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r1836845jkhg', 'settings' => $framework_home_cta ) ); ?>
 
