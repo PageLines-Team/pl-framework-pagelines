@@ -8,7 +8,7 @@ class PageLines_Ten {
 
   // enqueue styles and scripts.
   function scripts() {
-    wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css' );
+    wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/build.css' );
   }
 }
 
