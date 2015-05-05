@@ -74,12 +74,11 @@ module.exports = function(grunt) {
 	    less: {
 
 			compileMain: {
-	            src: 'style.less',
-              dest: 'style.css',
+	            src: 'build.less',
+              dest: 'build.css',
                 options: {
                     strictMath: true,
-                    sourceMap: false,
-                }
+                    sourceMap: false                }
 	        },
       compileSections: {
                 src:    'sections/*/build.less', //'sections/*/build.less',
@@ -108,8 +107,8 @@ module.exports = function(grunt) {
         roundingPrecision: -1
       },
       main: {
-        src: 'style.css',
-        dest: 'style.css'
+        src: 'build.css',
+        dest: 'build.css'
       }
     }
 
