@@ -93,9 +93,9 @@ $framework_videobox = array(
 
 	'col'			=> 6,
 	'upload_video'	=> 'http://localhost/pagelines-ten/wp-content/uploads/2015/04/pagelines1.mp4',
-	'auto_play'		=> 'autoplay',
-	'loop'			=> 'loop',
-	'controls'		=> 'controls'
+	'autoplay'		=> '1',
+	'loop'			=> '1',
+	'controls'		=> '1'
 
 );
 
@@ -146,7 +146,7 @@ $home_testimonials_heading = array(
 
 		<?php echo pl_get_section( array('section' => 'boxes', 'id' => 'r94757673dho', 'settings' => $framework_boxes ) ); ?>
 
-		<?php echo pl_get_section( array('section' => 'pl-videobox', 'id' => 'r94757653dro', 'settings' => $framework_videobox) ); ?>
+		<?php echo pl_get_section( array('section' => 'pl-videobox', 'id' => 'r94753653dro', 'settings' => $framework_videobox) ); ?>
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r1835845jkhg', 'settings' => $framework_home_cta ) ); ?>
 
