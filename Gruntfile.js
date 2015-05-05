@@ -59,7 +59,7 @@ module.exports = function(grunt) {
             },
             lessMain: {
                 // what files/folder we watching?
-                files: [ 'style.less' ],
+                files: [ 'build.less' ],
                 // tasks to run in order when something changes
                 tasks: ['less:compileMain'],
                 options: {
