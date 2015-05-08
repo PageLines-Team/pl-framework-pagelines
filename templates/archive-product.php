@@ -53,10 +53,11 @@ get_header( 'shop' ); ?>
 
 					<?php wc_get_template_part( 'content', 'product' ); ?>
 
+
 				<?php endwhile; // end of the loop. ?>
 
 			<?php woocommerce_product_loop_end(); ?>
-
+			
 			<?php
 				/**
 				 * woocommerce_after_shop_loop hook

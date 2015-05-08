@@ -35,8 +35,9 @@ $default_banner = array(
 
 $showcase_home_content = array(
 
+	'post_cols'			=> '3',
 	'post_type'			=> 'picasso-showcase',
-	'posts_total' 		=> '4',
+	'posts_total' 		=> '8',
 	'posts_meta_key'	=> 'featured',
 	'posts_meta_value'	=> '1'
 
@@ -129,7 +130,7 @@ $home_testimonials_heading = array(
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'e987654dfds', 'settings' => $showcase_home_heading ) ); ?>
 
-		<?php echo pl_get_section( array('section' => 'pl-loopgrid', 'id' => 'e6274534asdf', 'settings' => $showcase_home_content ) ); ?>
+		<?php echo pl_get_section( array('section' => 'pl-loopgrid', 'id' => 'e3271934asdf', 'settings' => $showcase_home_content ) ); ?>
 
 		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'r18367475jkhg', 'settings' => $showcase_home_cta ) ); ?>
 
