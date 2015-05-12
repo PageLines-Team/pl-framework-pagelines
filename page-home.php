@@ -18,7 +18,7 @@ $opts = array(
 pl_add_template_settings( $opts );
 
 
-$default_banner = array(
+$hero_banner = array(
 
 	'header' 				 => 'Build Professional Websites <br />Without Coding', 
 	'subheader' 			 => 'Built for WordPress. A Drag and drop editable, high performance design platform.', 
@@ -103,7 +103,7 @@ $framework_videobox = array(
 $framework_home_cta = array(
 
 	'header' 				 => '',
-	'button_primary'		 => 'http://www.pagelines.com/showcase/',
+	'button_primary'		 => 'http://themes.pagelines.com/dms?dobar==1',
 	'button_primary_text'	 => 'View Framework Demo',
 	'button_primary_style'	 => 'inverse'	
 );	
@@ -118,13 +118,13 @@ $home_testimonials_heading = array(
 
 ?>
 
-<div class="banner-board">
+<div class="home-hero-banner">
 
-	<?php echo pl_get_section( array('section' => 'elements', 'id' => 'e987654dasdf', 'settings' => $default_banner ) ); ?>
+	<?php echo pl_get_section( array('section' => 'elements', 'id' => 'e987654dasdf', 'settings' => $hero_banner ) ); ?>
 
 </div>
 
-<div class="home_showcase">
+<div class="home-showcase">
 
 	<div class="pl-content">
 
@@ -138,7 +138,7 @@ $home_testimonials_heading = array(
 
 </div>
 
-<div class="home_framework">
+<div class="home-framework">
 
 	<div class="pl-content">
 		<div class="row-flex">
@@ -156,7 +156,7 @@ $home_testimonials_heading = array(
 
 </div>
 
-<div class="home_testimonials">
+<div class="home-testimonials">
 
 	<div class="pl-content">
 		<div class="row-flex">

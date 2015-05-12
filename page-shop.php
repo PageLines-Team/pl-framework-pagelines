@@ -20,7 +20,8 @@ pl_add_template_settings( $opts );
 $header = array(
 
 	'header' 	=> 'Themes &amp; Extensions',
-	'theme'		=> 'pl-scheme-dark'
+	'theme'		=> 'pl-scheme-dark',
+	'alignment' => 'pl-alignment-left'
 
 );
 
@@ -116,15 +117,32 @@ $more_products = array(
 
 );
 
+$shop_nav = array(
+
+	'taxonomy'				=> 'category',
+	//'parent_taxonomies'		=> 'product',
+	//'child_taxonomies' 		=> '6',
+
+);
+
+$categories_nav = array(
+
+	'taxonomy'				=> 'product_cat',
+	//'parent_taxonomies'		=> 'product',
+	//'child_taxonomies' 		=> '6',
+
+);
+
+
 ?>
 
 <div class="shop-header">
 
-		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'pl98744dasdf', 'settings' => $header ) ); ?>
+		<?php echo pl_get_section( array('section' => 'elements', 'id' => 'pl98734dasdf', 'settings' => $header ) ); ?>
 
 </div>
 
-<div class="shop-featured-banner">
+<div class="shop-featured-banner" style="background: #f7f7f7;padding: 20px 0;">
 
 	<div class="pl-content">
 
@@ -140,7 +158,11 @@ $more_products = array(
 
 
 		<div class="col-sm-2">
-			Sidebar Left
+			
+			<?php echo pl_get_section( array('section' => 'pl-multitax', 'id' => 'pl12574594pltb', 'settings' => $shop_nav ) ); ?>
+
+			<?php echo pl_get_section( array('section' => 'pl-multitax', 'id' => 'pl12573594ehyd', 'settings' => $categories_nav ) ); ?>
+
 		</div>
 
 
