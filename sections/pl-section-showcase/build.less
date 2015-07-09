@@ -1,0 +1,150 @@
+// Mixins
+.flex-display(@display: flex) {
+  display: ~"-webkit-@{display}";
+  display: ~"-moz-@{display}";
+  display: ~"-ms-@{display}box"; // IE10 uses -ms-flexbox
+  display: ~"-ms-@{display}"; // IE11
+  display: @display;
+}
+
+.flex-direction(@direction: row) {
+  -webkit-flex-direction: @direction;
+     -moz-flex-direction: @direction;
+      -ms-flex-direction: @direction;
+          flex-direction: @direction;
+}
+
+.justify-content(@justify: center) {
+  -webkit-justify-content: @justify;
+     -moz-justify-content: @justify;
+      -ms-justify-content: @justify;
+          justify-content: @justify;
+}
+
+
+.pl-showcase-mast{
+  padding: 7vw; 
+
+  h1, h4{
+    margin: 0;
+  }
+  h4{
+    opacity: .5;
+  }
+
+}
+
+.pl-showcase-search{
+  margin-top: 1rem;
+  input{
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,.1);
+    font-size: 1.3em;
+    padding: .5em 1em; 
+    &:focus{
+      background: rgba(255,255,255,.1);
+      border: 1px solid #999;
+      outline: none;
+    }
+  }
+  .search-button{
+    background: none;
+    border: none;
+    position: absolute;
+    right: 0;
+    width: 2em;
+    font-size: 1.6em;
+    opacity: .3;
+    text-align: center;
+    &:hover, {
+      opacity: .5;
+    }
+    &:focus, 
+    &:active{
+      outline: none;
+    }
+  }
+} 
+
+.showcase-item-image{
+  padding: 35% 50%;
+  display: block;
+  background-color: rgba(0,0,0,.05);
+  position: relative;
+  .showcase-item-overlay{
+    opacity: 0; 
+    position: absolute; 
+    display: block;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,.5);
+    transition: opacity .2s;
+    text-align: center;
+    color: #fff;
+    .flex-display(); 
+    .flex-direction(column);
+    .justify-content(center);
+
+  }
+  &:hover .showcase-item-overlay{
+    opacity: 1;
+  }
+}
+
+.showcase-item-meta{
+  padding: .5em 0 1.5em 0;
+  font-size: .85em;
+  a{
+    color: inherit;
+  }
+}
+
+
+
+.resource-chapter{
+  margin-bottom: 2em;
+  .chapter-icon{
+    font-size: 5em;
+    line-height: 1;
+    opacity: 1;
+    width: 150px;
+    text-align: right;
+  }
+  .chapter-items{
+    padding: .5em;
+    h3{
+      margin: 0;
+      font-weight: 500;
+    }
+    .sub{
+      opacity: .5;
+    }
+    ul{
+      padding: 0;
+      margin: 1em 0;
+      list-style-type: none;
+      > li{
+        margin-bottom: 1em;
+      }
+    }
+    .chapter-list-item{
+      list-style-type: none;
+      a{
+        display: block;
+        border: 1px solid #ddd;
+        padding: .8em 1.5em;
+        line-height: 1;
+        &:hover{
+          text-decoration: none;
+          border: 1px solid #ccc;
+        }
+      }
+    }
+  }
+}
+
+
+
