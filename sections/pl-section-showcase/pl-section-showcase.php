@@ -68,7 +68,7 @@ class PL_Picasso_Showcase extends PageLinesSection {
 
     ?>
     
-    <?php if( ! is_single()):?>
+    <?php if( is_page() && ! isset( $_GET['type'] ) ):?>
     <div class="pl-showcase-mast">
       <div class="pl-content">
         <h4><a href="<?php echo get_post_type_archive_link( get_post_type( ) );?>"><?php echo pl_setting('showcase_for', get_bloginfo('name'));?></a></h4>
@@ -318,11 +318,10 @@ class PL_Picasso_Showcase extends PageLinesSection {
 
     $author_id = get_the_author_meta('ID');
     
-    $url = get_post_meta( $post->ID, 'siteurl', true );
+    $url      = get_post_meta( $post->ID, 'siteurl', true );
     
-    $agency = get_user_meta( $author_id, 'picasso_name', true );
+    $agency   = get_user_meta( $author_id, 'picasso_name', true );
 
-    $twitter  = get_user_meta( $author_id, 'picasso_twitter', true );
     $country  = get_user_meta( $author_id, 'picasso_country', true );
     $city     = get_user_meta( $author_id, 'picasso_city', true );
     $author   = get_the_author('');
@@ -330,6 +329,9 @@ class PL_Picasso_Showcase extends PageLinesSection {
     $agency = sprintf(' <a href="%s%s">%s</a>', site_url( '/author/' ), get_the_author_meta('user_login'), $agency );
 
     
+    if( $city ){
+      $loc = sprintf(' from %s, %s', $city, $country);
+    }
 
     $url = get_post_meta( $post->ID, 'siteurl', true );
 
@@ -338,11 +340,14 @@ class PL_Picasso_Showcase extends PageLinesSection {
     if( empty($content) )
       $content = get_the_excerpt();
 
+
+    $go = pl_setting('pl_go_text', 'Check it out');
+
     ?>
     <div class="row">
       <div class="col-sm-6">
         <a href="<?php echo $url;?>" class="showcase-item-image grid-media aspect pl-bg-cover" style="background-image: url(<?php echo pl_the_thumbnail_url( $post->ID );?>)">
-          <span class="grid-media-info">Check it out</span>
+          <span class="grid-media-info"><?php echo $go;?></span>
         </a>
 
         
@@ -355,7 +360,7 @@ class PL_Picasso_Showcase extends PageLinesSection {
           <h2 class="entry-title"><?php echo get_the_title(); ?></h2>
           <div class="metabar showcase-metabar">
 
-          <?php printf( '<span class="panel-author">By <em>%s</em> from %s, %s</span>', $agency, $city, $country ); ?>
+          <?php printf( '<span class="panel-author">By <em>%s</em>%s</span>', $agency, $loc ); ?>
           <div class="s-tags">
             Tags: <?php echo get_the_term_list( get_the_ID(), $this->config->tax_tags, "") ?>
           </div>
@@ -364,11 +369,11 @@ class PL_Picasso_Showcase extends PageLinesSection {
         
           <div class="site-details-cta">
             <?php if($url):?>
-              <a href="<?php echo $url;?>" class="btn btn-primary btn-large" target="_blank">Check It Out</a>
+              <a href="<?php echo $url;?>" class="btn btn-primary btn-large" target="_blank"><?php echo $go;?></a>
             <?php endif;?>
 
             <?php if( true == get_the_author_meta( 'picasso_hireme', $author_id ) ):?>
-              <a href="<?php echo site_url( '/author/' . get_the_author_meta('user_login'));?>" class="btn btn-default btn-large">Contact Designer</a>
+              <a href="<?php echo site_url( '/author/' . get_the_author_meta('user_login'));?>" class="btn btn-default btn-large">About The Designer</a>
             <?php endif;?>
 
             
@@ -680,20 +685,14 @@ class PL_Showcase_Configuration {
     global $post;
     $author = $post->post_author;
 
-    $default  = '<strong><span style="color:red">&nbsp;&#10008;</span></strong>';
-    $good     = '<strong><span style="color:lightgreen">&nbsp;&nbsp;&#10004;</span></strong>';
+    $user_fields = array( 'picasso_name', 'picasso_city', 'picasso_country', 'picasso_twitter', 'contact_url', 'picasso_bio');
 
-    $name     = ( get_user_meta( $author, 'picasso_name', true ) )    ? get_user_meta( $author, 'picasso_name', true ) . $good : $default;
-    $country  = ( get_user_meta( $author, 'picasso_country', true ) ) ? get_user_meta( $author, 'picasso_country', true ) . $good : $default;
-    $city     = ( get_user_meta( $author, 'picasso_city', true ) )    ? get_user_meta( $author, 'picasso_city', true ) . $good : $default;
-    $twitter  = ( get_user_meta( $author, 'picasso_twitter', true ) ) ? get_user_meta( $author, 'picasso_twitter', true ) . $good : $default;
+    $li = '';
+    foreach( $user_fields as $field ){
+      $li .= sprintf('<li><strong>%s</strong>: %s</li>', explode('_', $field)[1], get_user_meta( $author, $field , true ));
+    }
 
-    printf( '<p><strong>Name:</strong> %s</p><p><strong>City:</strong> %s</p><p><strong>Country:</strong> %s</p><p><strong>Twitter:</strong> %s</p>',
-      $name,
-      $city,
-      $country,
-      $twitter
-    );
+    printf( '<h4>Profile field values</h4><ul>%s</ul>', $li );
 
   }
 
