@@ -18,6 +18,9 @@
 .rad-profile .avatar img {
   border-radius: 50%;
 }
+.rad-profile-contact {
+  margin: 1em 0 0;
+}
 .rad-author-posts {
   margin: 1em 0;
 }
@@ -32,9 +35,6 @@
 /** Alignments */
 /** Default */
 .rad-profile {
-  text-align: center;
-}
-.rad-profile .hentry {
   text-align: center;
 }
 .pl-alignment-left .rad-profile {

@@ -25,12 +25,39 @@ class PL_Picasso_Showcase extends PageLinesSection {
     $this->tax_tags   = 'picasso-tags';
     $this->tax_cats   = 'picasso-genres';
 
+    global $plpg;
+    $this->page       = $plpg;
+
 
     $this->config     = new PL_Showcase_Configuration;
 
     add_action( 'pl_rad_profile_additions', array( $this, 'add_to_profile'), 10, 2 );
 
   }
+
+  function section_opts(){
+    $opts = array(
+      
+      array(
+        'type'      => 'multi',
+        
+        'opts'  => array(
+          array(
+            'key'       => 'help',
+            'type'      => 'help',
+            'help'      => sprintf( '<p>This section is designed to operate on different post types related to your showcase. For example, the showcase home, archive, single and category pages. Add it to all of these types and you will see the showcase as designed.<br/> <strong>Note:</strong> This section makes heavy use of permalinks, if you have an issue make sure to regenerate them by saving them on <a href="%s">this page</a>.</p>', admin_url('options-permalink.php') ),
+          ),
+
+        )
+      ),
+      
+
+    );
+
+    return $opts;
+
+  }
+
 
   function section_template(){
 
@@ -54,7 +81,7 @@ class PL_Picasso_Showcase extends PageLinesSection {
             </button>
             <input type="text" name="s" id="search" value="<?php the_search_query(); ?>" placeholder="Search..." />
             <?php echo ( pl_is_workarea_iframe() ) ? '<input type="hidden" name="workarea-iframe" value="1"/>' : ''; ?>
-            <input type="hidden" value="<?php echo $this->pt;?>" name="post_type" id="post_type" />
+            <input type="hidden" value="<?php echo $this->config->pt;?>" name="post_type" id="post_type" />
           </fieldset>
         </form>
       </div>
@@ -91,12 +118,13 @@ class PL_Picasso_Showcase extends PageLinesSection {
     ?>
     <div class="picasso-stacked-nav">
       <div class="widget">
-        <h3 class="widgettitle">Showcase</h3>
+        <h3 class="widgettitle"><?php echo $this->config->title;?></h3>
 
         <ul class="nav nav-tabs nav-stacked nav-stacked-special">
-         <li class="showcase-all"><a href="<?php echo get_post_type_archive_link( get_post_type( ) );?>">All</a></li>
-         <li class="showcase-latest"><a href="<?php echo site_url( '/showcase/sites/latest/' ); ?>">Latest</a></li>
-         <li class="showcase-popular"><a href="<?php echo site_url( '/showcase/sites/popular/' ); ?>">Popular</a></li>
+         <li class="showcase-all"><a href="<?php echo get_post_type_archive_link( $this->config->pt );?>">All</a></li>
+         <li class="showcase-latest"><a href="<?php echo site_url( $this->config->rewrite_base . '?type=latest' ); ?>">Latest</a></li>
+
+         <li class="showcase-popular"><a href="<?php echo site_url( $this->config->rewrite_base . '?type=popular' ); ?>">Popular</a></li>
         </ul>
       </div>
       <div class="widget">
@@ -104,16 +132,19 @@ class PL_Picasso_Showcase extends PageLinesSection {
 
         <ul class="nav nav-tabs nav-stacked nav-stacked-special">
 
-         <?php
-         $args = array(
+        <?php
+
+          $args = array(
              'orderby'      => 'name',
              'show_count'   => 0,
              'pad_counts'   => 0,
              'hierarchical' => 0,
-             'taxonomy'     => 'picasso-genres',
+             'taxonomy'     => $this->config->tax_cats,
              'title_li'     => ''
-         );
+          );
+
          wp_list_categories($args);
+         
          ?>
        </ul>
       </div>
@@ -124,6 +155,9 @@ class PL_Picasso_Showcase extends PageLinesSection {
 
   function get_content(){
 
+    global $plpg;
+    $this->page = $plpg;
+
     ob_start();
 
     if( is_search() ){
@@ -131,12 +165,13 @@ class PL_Picasso_Showcase extends PageLinesSection {
     }
 
     else if( is_page() ){
-      $this->get_showcase_home();
+      $this->get_showcase_page();
      
     }
 
     else if( is_archive() ){
-      echo $this->draw_grid( $this->get_items( array( 'type'  => 'archive' ) ) );
+
+      echo $this->draw_grid( $this->get_items( array( 'type'  => $this->page->get_current_page_name(), 'use_query' => true ) ) );
      
     }
 
@@ -149,11 +184,23 @@ class PL_Picasso_Showcase extends PageLinesSection {
     return ob_get_clean();
   }
 
-  function get_showcase_home(){
+  function get_showcase_page(){
 
-    echo $this->draw_grid( $this->get_items( array( 'type'  => 'featured',  'posts_per_page' => 6 ) ) );
-    echo $this->draw_grid( $this->get_items( array( 'type'  => 'popular',   'posts_per_page' => 6 ) ) );
-    echo $this->draw_grid( $this->get_items( array( 'type'  => 'new',       'posts_per_page' => 6 ) ) );
+    
+
+    if( isset($_GET['type']) ){
+
+      echo $this->draw_grid( $this->get_items( array( 'type'  => $_GET['type'],  'posts_per_page' => 30 ) ) );
+
+    } 
+
+    else{
+      echo $this->draw_grid( $this->get_items( array( 'type'  => 'featured',  'posts_per_page' => 6 ) ) );
+      echo $this->draw_grid( $this->get_items( array( 'type'  => 'popular',   'posts_per_page' => 6 ) ) );
+      echo $this->draw_grid( $this->get_items( array( 'type'  => 'new',       'posts_per_page' => 9 ) ) );
+    }
+
+   
 
   }
 
@@ -188,23 +235,35 @@ class PL_Picasso_Showcase extends PageLinesSection {
 
      $items_html = ob_get_clean(); 
 
+
+
      return sprintf('<div class="grid-header"><h4>%s</h4></div><div class="row pl-media-grid">%s</div>', ucfirst($args['type']), $items_html);
 
   }
 
   function add_to_profile( $author_ID ){
-    echo $this->draw_grid( $this->get_items( array( 'type'  => $this->config->title, 'author'=> $author_ID ) ) );
+    echo $this->draw_grid( $this->get_items( array( 'type'  => 'On ' . $this->config->title, 'author'=> $author_ID ) ) );
   }
 
   function get_items( $args = array() ){
 
+    if( isset($args['use_query']) && true == $args['use_query'] ){
+      global $wp_query;
+      $q = $wp_query->query;
+    }
+    else {
+      $q = array();
+    }
 
-    $defaults = array(
+    
+
+
+    $defaults = wp_parse_args( array(
         'post_type'       => 'picasso-showcase',
         'post_status'     => 'publish',
         'posts_per_page'  => 30,
         'type'            => 'new'
-      );
+      ), $q);
 
     $args = wp_parse_args( $args, $defaults );
 
@@ -234,6 +293,15 @@ class PL_Picasso_Showcase extends PageLinesSection {
       );
 
     }
+
+    elseif( 'popular' == $args['type'] ){
+
+      /** Return most viewed showcase items */
+     return $this->get_trending( -1 );
+
+    }
+
+    
 
     $query = new WP_Query( $args );
 
@@ -295,13 +363,15 @@ class PL_Picasso_Showcase extends PageLinesSection {
           </div>
         
           <div class="site-details-cta">
-            <?php if( true == get_the_author_meta( 'picasso_hireme', $author_id ) ):?>
-              <a href="<?php echo site_url( '/author/' . get_the_author_meta('user_login'));?>" class="btn btn-primary btn-large">Contact</a>
+            <?php if($url):?>
+              <a href="<?php echo $url;?>" class="btn btn-primary btn-large" target="_blank">Check It Out</a>
             <?php endif;?>
 
-            <?php if($url):?>
-              <a href="<?php echo $url;?>" class="btn btn-default btn-large" target="_blank">Check It Out</a>
+            <?php if( true == get_the_author_meta( 'picasso_hireme', $author_id ) ):?>
+              <a href="<?php echo site_url( '/author/' . get_the_author_meta('user_login'));?>" class="btn btn-default btn-large">Contact Designer</a>
             <?php endif;?>
+
+            
           </div>
         </div>
 
@@ -502,53 +572,7 @@ class PL_Showcase_Configuration {
     return $settings;
   }
 
-  function add_profile_settings( $settings ){
-
-    $settings[$this->pt] = array(
-      'key'       => $this->pt,
-      'icon'      => 'cubes',
-      'pos'       => 10, 
-      'title'     => $this->title . __( ' Info' , 'pagelines' ),
-      'opts'  => array(
-
-
-        array(
-         'key'           => 'picasso_name',
-         'type'          => 'text',
-         'title'         => __( 'Business Name', 'pagelines' ),
-        ),
-        array(
-         'key'           => 'picasso_city',
-         'type'          => 'text',
-         'title'         => __( 'Business City', 'pagelines' ),
-        ),
-        array(
-         'key'           => 'picasso_country',
-         'type'          => 'text',
-         'title'         => __( 'Business Country', 'pagelines' ),
-        ),
-        array(
-         'key'           => 'picasso_twitter',
-         'type'          => 'text',
-         'title'         => __( 'Business Twitter', 'pagelines' ),
-        ),
-        array(
-         'key'           => 'picasso_bio',
-         'type'          => 'textarea',
-         'title'         => __( 'Your Business Bio', 'pagelines' ),
-        ),
-        array(
-         'key'           => 'picasso_hireme',
-         'type'          => 'checkbox',
-         'title'         => __( 'User Contact', 'pagelines' ),
-         'label'         => __( 'Allow users to contact you?', 'pagelines' ),
-        ),
-      )
-    ); 
-    
-
-    return $settings;
-  }
+  
 
   function create_post_type(){
 
