@@ -26,12 +26,11 @@ class PL_Picasso_Showcase extends PageLinesSection {
     $this->tax_cats   = 'picasso-genres';
 
 
+    $this->config     = new PL_Showcase_Configuration;
 
-    
+    add_action( 'pl_rad_profile_additions', array( $this, 'add_to_profile'), 10, 2 );
+
   }
-
-  
-
 
   function section_template(){
 
@@ -39,12 +38,14 @@ class PL_Picasso_Showcase extends PageLinesSection {
     
     $pt_name = get_post_type_object( get_post_type( ) )->labels->name;
 
-    ?>
 
+    ?>
+    
+    <?php if( ! is_single()):?>
     <div class="pl-showcase-mast">
       <div class="pl-content">
-        <h4><a href="<?php echo get_post_type_archive_link( get_post_type( ) );?>"><?php echo ( ! is_archive() ) ? $pt_name : 'PageLines Framework';?></a></h4>
-        <h1><?php (is_archive()) ? post_type_archive_title() : the_title();?></h1>
+        <h4><a href="<?php echo get_post_type_archive_link( get_post_type( ) );?>"><?php echo pl_setting('showcase_for', get_bloginfo('name'));?></a></h4>
+        <h1><?php echo $this->config->title;?></h1>
 
         <form class="pl-showcase-search" action="<?php echo home_url( '/' ); ?>" method="get">
           <fieldset>
@@ -58,6 +59,9 @@ class PL_Picasso_Showcase extends PageLinesSection {
         </form>
       </div>
     </div>
+    
+    <?php endif;?>
+
     <div class="pl-showcase-content">
       <div class="pl-content">
         <div class="row">
@@ -66,7 +70,7 @@ class PL_Picasso_Showcase extends PageLinesSection {
               <?php echo $this->showcase_navigation();?>
             </div>
           </div>
-          <div class="showcase-entry col-sm-8">
+          <div class="showcase-entry col-sm-8 top-on-mobile">
             <div class="pad">
               <?php echo $this->get_content();?>
             </div>
@@ -123,7 +127,7 @@ class PL_Picasso_Showcase extends PageLinesSection {
     ob_start();
 
     if( is_search() ){
-      $this->get_search();
+      echo $this->draw_grid( $this->get_items( array( 'type'  => 'search', 's' => $_GET['s'] ) ) );
     }
 
     else if( is_page() ){
@@ -132,7 +136,7 @@ class PL_Picasso_Showcase extends PageLinesSection {
     }
 
     else if( is_archive() ){
-      $this->get_archive();
+      echo $this->draw_grid( $this->get_items( array( 'type'  => 'archive' ) ) );
      
     }
 
@@ -154,22 +158,27 @@ class PL_Picasso_Showcase extends PageLinesSection {
   }
 
   function draw_grid( $args ){
-     ob_start();
 
-     foreach( $args['posts'] as $post ):
+    if( empty($args['posts']) ){
+      return '';
+    }
+
+    ob_start();
+
+    foreach( $args['posts'] as $post ):
 
     ?>
     
      <div class="col-sm-4">
 
        <div class="showcase-item">
-         <a class="showcase-item-image pl-bg-cover" href="<?php echo get_the_permalink( $post->ID ); ?>" style="background-image: url(<?php echo pl_the_thumbnail_url( $post->ID );?>)">
-           <span class="showcase-item-overlay">View</span>
+         <a class="showcase-item-image grid-media aspect pl-bg-cover" href="<?php echo get_the_permalink( $post->ID ); ?>" style="background-image: url(<?php echo pl_the_thumbnail_url( $post->ID );?>)">
+           <span class="showcase-item-overlay grid-media-info"><span class="info-text">View</span></span>
          </a>
-         <div class="showcase-item-meta showcase-meta-title">
+         <div class="showcase-item-meta showcase-meta-title meta-title">
            <a class="showcase-meta-title" href="<?php echo get_the_permalink( $post->ID ); ?>"><?php echo $post->post_title; ?></a>
          </div>
-           <?php //echo picasso_showcase_get_likes( $post->ID ); ?>
+        
        </div>
          
 
@@ -179,8 +188,12 @@ class PL_Picasso_Showcase extends PageLinesSection {
 
      $items_html = ob_get_clean(); 
 
-     return sprintf('<div class="grid-header"><h4>%s</h4></div><div class="row">%s</div>', ucfirst($args['type']), $items_html);
+     return sprintf('<div class="grid-header"><h4>%s</h4></div><div class="row pl-media-grid">%s</div>', ucfirst($args['type']), $items_html);
 
+  }
+
+  function add_to_profile( $author_ID ){
+    echo $this->draw_grid( $this->get_items( array( 'type'  => $this->config->title, 'author'=> $author_ID ) ) );
   }
 
   function get_items( $args = array() ){
@@ -189,7 +202,7 @@ class PL_Picasso_Showcase extends PageLinesSection {
     $defaults = array(
         'post_type'       => 'picasso-showcase',
         'post_status'     => 'publish',
-        'posts_per_page'  => 16,
+        'posts_per_page'  => 30,
         'type'            => 'new'
       );
 
@@ -208,6 +221,20 @@ class PL_Picasso_Showcase extends PageLinesSection {
 
     }
 
+    elseif( 'similar' == $args['type'] ){
+
+      global $post;
+
+      $args['tax_query'] = array(
+          array(
+              'taxonomy'  => $this->config->tax_tags,
+              'field'     => 'id',
+              'terms'     => wp_get_object_terms($post->ID, $this->config->tax_tags, array('fields'=>'ids'))
+          )
+      );
+
+    }
+
     $query = new WP_Query( $args );
 
     $args['posts'] = $query->posts;
@@ -216,66 +243,83 @@ class PL_Picasso_Showcase extends PageLinesSection {
 
   }
 
-  function get_search(){
-
-    while ( have_posts() ) : the_post(); ?>
-            
-      <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-      <?php the_content();?>
-         
-    <?php endwhile; 
-
-  }
-
+  
   function get_single(){
-?>
-    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-<?php 
-    the_content();
 
-  }
+    global $wp_query, $post;
 
-  function get_archive(){
-
-     $terms = $this->config->get_ordered_terms();
+    $author_id = get_the_author_meta('ID');
     
-    foreach( $terms as $term ) {
+    $url = get_post_meta( $post->ID, 'siteurl', true );
+    
+    $agency = get_user_meta( $author_id, 'picasso_name', true );
 
-        $term_meta = get_option( "taxonomy_$term->term_id" ); 
-     
-        // Define the query
-        $args = array(
-            'post_type'   => $this->pt,
-            $this->tax    => $term->slug
-        );
-        $query = new WP_Query( $args );
+    $twitter  = get_user_meta( $author_id, 'picasso_twitter', true );
+    $country  = get_user_meta( $author_id, 'picasso_country', true );
+    $city     = get_user_meta( $author_id, 'picasso_city', true );
+    $author   = get_the_author('');
 
-        $icon = ( isset($term->meta['icon_slug']) && $term->meta['icon_slug'] != '' ) ? $term->meta['icon_slug'] : 'pagelines';
+    $agency = sprintf(' <a href="%s%s">%s</a>', site_url( '/author/' ), get_the_author_meta('user_login'), $agency );
 
-        $icon = str_replace( 'icon-', '', $icon );
+    
 
-        ?>
-        <div class="resource-chapter media fix">
-          <div class="chapter-icon img"><i class="icon icon-<?php echo $icon;?>"></i></div>
-          
-          <div class="chapter-items bd">
-          <h3><?php echo $term->name;?></h3>
-          <div class="sub"><?php echo $term->description;?></div>
-          <ul>
-        <?php 
+    $url = get_post_meta( $post->ID, 'siteurl', true );
 
-        while ( $query->have_posts() ) : $query->the_post(); ?>
-         
-            <li class="chapter-list-item" id="post-<?php the_ID(); ?>">
-                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-            </li>
-      
-        <?php endwhile; ?>
-          </ul>
+    $content = get_the_content();
+
+    if( empty($content) )
+      $content = get_the_excerpt();
+
+    ?>
+    <div class="row">
+      <div class="col-sm-6">
+        <a href="<?php echo $url;?>" class="showcase-item-image grid-media aspect pl-bg-cover" style="background-image: url(<?php echo pl_the_thumbnail_url( $post->ID );?>)">
+          <span class="grid-media-info">Check it out</span>
+        </a>
+
+        
+      </div>
+
+      <div class="col-sm-6 pl-flex-vertical">
+
+        <div class="showcase-actions">
+
+          <h2 class="entry-title"><?php echo get_the_title(); ?></h2>
+          <div class="metabar showcase-metabar">
+
+          <?php printf( '<span class="panel-author">By <em>%s</em> from %s, %s</span>', $agency, $city, $country ); ?>
+          <div class="s-tags">
+            Tags: <?php echo get_the_term_list( get_the_ID(), $this->config->tax_tags, "") ?>
+          </div>
+
+          </div>
+        
+          <div class="site-details-cta">
+            <?php if( true == get_the_author_meta( 'picasso_hireme', $author_id ) ):?>
+              <a href="<?php echo site_url( '/author/' . get_the_author_meta('user_login'));?>" class="btn btn-primary btn-large">Contact</a>
+            <?php endif;?>
+
+            <?php if($url):?>
+              <a href="<?php echo $url;?>" class="btn btn-default btn-large" target="_blank">Check It Out</a>
+            <?php endif;?>
           </div>
         </div>
- <?php         
-    }
+
+      </div>
+    </div>
+
+    <div class="hentry showcase-item-content">
+      <?php echo $content; ?>          
+    </div>
+        
+    <div class="similar-sites">
+      <?php echo $this->draw_grid( $this->get_items( array( 'type' => 'similar', 'posts_per_page' => 6 ) ) );?>
+    </div>
+        
+        
+
+
+    <?php
 
   }
 
@@ -306,6 +350,8 @@ class PL_Picasso_Showcase extends PageLinesSection {
     $trending = $this->get_trending();
     $featured = $this->get_items( array( 'type'  => 'featured',  'posts_per_page' => 12 ) );
     ?>
+
+    <?php if( ! empty( $trending ) ): ?>
     <div class="widget">
       <h3 class="widgettitle">Trending</h3>
       <ul class="widgetlist">
@@ -314,7 +360,7 @@ class PL_Picasso_Showcase extends PageLinesSection {
         <?php endforeach;?>
       </ul>
     </div>
-
+    <?php endif; ?>
   
     <div class="widget">
       <h3 class="widgettitle">Featured</h3>
@@ -350,18 +396,67 @@ class PL_Showcase_Configuration {
     $this->tax_tags   = 'picasso-tags';
     $this->tax_cats   = 'picasso-genres';
 
+    $this->rewrite_base = pl_setting('base_rewrite_slug', 'showcase');
+
+    $this->title        = pl_setting('showcase_title', 'Showcase');
+
+
+
 
     $this->create_post_type();
 
-    add_filter( 'pl_connect_meta_settings_array', array( $this, 'add_meta_settings' ) ); 
+    add_filter( 'pl_connect_meta_settings_array',             array( $this, 'add_meta_settings' ) ); 
 
-    add_filter( 'pl_connect_profile_settings_array', array( $this, 'add_profile_settings' ) ); 
+    add_filter( 'pl_connect_profile_settings_array',          array( $this, 'add_profile_settings' ) ); 
 
-    add_action( 'pagelines_options_showcase_author_details', array( $this, 'author_details' ) );
+    add_filter( 'pl_connect_settings_array',                  array( $this, 'add_global_settings') );
+
+    add_action( 'pagelines_options_showcase_author_details',  array( $this, 'author_details' ) );
 
 
     add_action( 'trashed_post',                                     array( $this, 'trash_post_rename' ),1 ,1 );
 
+  }
+
+  function add_global_settings( $settings ){
+
+    $settings[$this->pt] = array(
+      'key'       => $this->pt,
+      'icon'      => 'cubes',
+      'pos'       => 350, 
+      'title'     => $this->title,
+      'opts'  => array(
+
+        array(
+         'key'        => 'showcase_title',
+         'type'       => 'text',
+         'title'      => __( 'Showcase Title', 'pagelines' ),
+         'help'       => __( 'What is the name of your showcase? Maybe just "Showcase" ;)', 'pagelines' ),
+         'place'      => 'Showcase'
+        ),
+        array(
+         'key'        => 'showcase_for',
+         'type'       => 'text',
+         'title'      => __( 'Showcase Subject', 'pagelines' ),
+         'help'       => __( 'What are you showcasing? Use singular term. Example: Website, PageLines, Design, etc...', 'pagelines' ),
+         'place'      => get_bloginfo('name')
+        ),
+
+        array(
+         'key'        => 'base_rewrite_slug',
+         'type'       => 'text',
+         'title'      => __( 'Base Permalink Rewrite Slug', 'pagelines' ),
+         'help'       => sprintf(__( 'This section uses custom post types, which operate across several pages in your site. As such, we need a base slug relative to your site url, that you would like to build permalinks on... Note: once changed, you will need to save your <a href="%s">permalink settings</a> for effect.', 'pagelines' ), admin_url('options-permalink.php')),
+         'place'      => 'showcase'
+        ),
+
+
+      )
+    ); 
+
+    
+
+    return $settings;
   }
 
   function add_meta_settings( $settings ){
@@ -369,11 +464,11 @@ class PL_Showcase_Configuration {
     if( $this->pt == get_current_screen()->post_type ){
 
       $settings[$this->pt] = array(
-          'key'       => 'about',
-          'icon'      => 'thumb-tack',
+          'key'       => $this->pt,
+          'icon'      => 'cubes',
           'pos'       => 10, 
-          'location'  => 'post',
-          'title'     => __( 'Showcase' , 'pagelines' ),
+          'location'  => $this->pt,
+          'title'     => $this->title,
           'opts'  => array(
 
             array(
@@ -410,11 +505,10 @@ class PL_Showcase_Configuration {
   function add_profile_settings( $settings ){
 
     $settings[$this->pt] = array(
-      'key'       => 'about',
-      'icon'      => 'user',
+      'key'       => $this->pt,
+      'icon'      => 'cubes',
       'pos'       => 10, 
-      'location'  => 'post',
-      'title'     => __( 'Showcase Info' , 'pagelines' ),
+      'title'     => $this->title . __( ' Info' , 'pagelines' ),
       'opts'  => array(
 
 
@@ -458,6 +552,8 @@ class PL_Showcase_Configuration {
 
   function create_post_type(){
 
+    
+
     register_post_type( $this->pt,
       array(
 
@@ -465,13 +561,13 @@ class PL_Showcase_Configuration {
         'has_archive'   => true,
         'menu_icon'     => 'dashicons-media-text', 
         'menu_position' => 5,
-        'rewrite'       => array( 'slug' => 'showcase/items' ),
+        'rewrite'       => array( 'slug' => $this->rewrite_base . '/items' ),
         'query_var'     => true,
         'has_archive'   => true,
 
         'labels' => array(
-          'name'          => __( 'Showcase' ),
-          'singular_name' => __( 'Showcase Item' )
+          'name'          => $this->title,
+          'singular_name' => $this->title . __( ' Item' )
         ),
         
         'supports' => array(
@@ -501,27 +597,27 @@ class PL_Showcase_Configuration {
       'show_ui'           => true,
       'show_admin_column' => true,
       'query_var'         => true,
-      'rewrite'           => array( 'slug' => 'showcase/genre' ),
+      'rewrite'           => array( 'slug' => $this->rewrite_base . '/genre' ),
     );
 
 
 
     $args = wp_parse_args( array(
         'labels'  => array(
-                      'name'              => __( 'Showcase Genres', 'pagelines' ),
-                      'singular_name'     => __( 'Showcase Genre', 'pagelines' )
+                      'name'              => $this->title . __( ' Genres', 'pagelines' ),
+                      'singular_name'     => $this->title . __( ' Genre', 'pagelines' )
                     ), 
-        'rewrite' => array( 'slug' => 'showcase/genre' )
+        'rewrite' => array( 'slug' => $this->rewrite_base . '/genre' )
       ), $tax_defaults );
 
     register_taxonomy( $this->tax_cats, array( $this->pt ), $args );
 
     $args = wp_parse_args( array(
         'labels'  => array(
-                      'name'              => __( 'Showcase Tags', 'pagelines' ),
-                      'singular_name'     => __( 'Showcase Tag', 'pagelines' )
+                      'name'              => $this->title . __( ' Tags', 'pagelines' ),
+                      'singular_name'     => $this->title . __( ' Tag', 'pagelines' )
                     ), 
-        'rewrite' => array( 'slug' => 'showcase/tags' )
+        'rewrite' => array( 'slug' => $this->rewrite_base . '/tags' )
       ), $tax_defaults );
 
     register_taxonomy( $this->tax_tags, array( $this->pt ), $args );
@@ -582,6 +678,6 @@ class PL_Showcase_Configuration {
  
 }
 
-new PL_Showcase_Configuration;
+
 
 } /** End Config Class **/

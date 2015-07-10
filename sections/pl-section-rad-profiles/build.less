@@ -1,0 +1,91 @@
+// Mixins
+.flex-display(@display: flex) {
+  display: ~"-webkit-@{display}";
+  display: ~"-moz-@{display}";
+  display: ~"-ms-@{display}box"; // IE10 uses -ms-flexbox
+  display: ~"-ms-@{display}"; // IE11
+  display: @display;
+}
+
+.flex-direction(@direction: row) {
+  -webkit-flex-direction: @direction;
+     -moz-flex-direction: @direction;
+      -ms-flex-direction: @direction;
+          flex-direction: @direction;
+}
+
+.justify-content(@justify: center) {
+  -webkit-justify-content: @justify;
+     -moz-justify-content: @justify;
+      -ms-justify-content: @justify;
+          justify-content: @justify;
+}
+
+.flex-vertical(){
+  .flex-display(); 
+  .flex-direction( column );
+  .justify-content( center ); 
+}
+
+
+.rad-profile{
+  max-width: 40em;
+    margin: 0 auto;
+    text-align: center;
+
+  .metabar{
+    a{
+      color: inherit;
+      opacity: .5;
+      margin: 0 .4em; 
+      &:hover{
+        opacity: 1;
+      }
+    }
+  }
+  .hentry{
+    margin: 1.5em 0;
+    font-size: 1.1em;
+  }
+  .avatar img{
+    border-radius: 50%;
+  }
+}
+
+.rad-author-posts{
+  margin: 1em 0; 
+  h4{
+    font-size: 1em; 
+    margin-bottom: 0;
+  }
+  .exc{
+    font-size: .85em;
+    opacity: .6;
+  }
+}
+
+/** Alignments */
+
+/** Default */
+
+.rad-profile{
+  text-align: center; 
+  .hentry{
+    text-align: center;
+  }
+}
+
+.pl-alignment-left{
+  .rad-profile{
+    text-align: left; 
+  }
+}
+
+.pl-alignment-right{
+ .rad-profile{
+   text-align: right; 
+   .hentry{
+     text-align: right;
+   }
+ }
+}
