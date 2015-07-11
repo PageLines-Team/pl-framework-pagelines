@@ -1,0 +1,73 @@
+.pl-showcase-mast {
+  padding: 7vw;
+}
+.pl-showcase-mast h1,
+.pl-showcase-mast h4 {
+  margin: 0;
+}
+.pl-showcase-mast h4 {
+  opacity: .5;
+}
+.pl-showcase-search {
+  margin-top: 1rem;
+}
+.pl-showcase-search input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 1.3em;
+  padding: .5em 1em;
+}
+.pl-showcase-search input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #999;
+  outline: none;
+}
+.pl-showcase-search .search-button {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 0;
+  width: 2em;
+  font-size: 1.6em;
+  opacity: .3;
+  text-align: center;
+}
+.pl-showcase-search .search-button:hover {
+  opacity: .5;
+}
+.pl-showcase-search .search-button:focus,
+.pl-showcase-search .search-button:active {
+  outline: none;
+}
+.showcase-sidebar h3:first-of-type {
+  margin-top: 0;
+}
+.showcase-metabar {
+  margin-bottom: 1em;
+  font-size: .85em;
+}
+.showcase-metabar .s-tags {
+  display: inline-block;
+}
+.showcase-metabar .s-tags i {
+  margin-right: 3px;
+}
+.showcase-metabar .s-tags a {
+  color: inherit;
+  margin-right: 5px;
+  text-transform: capitalize;
+  display: inline-block;
+  opacity: .5;
+}
+.showcase-metabar .s-tags a:hover {
+  opacity: 1;
+}
+.showcase-actions {
+  padding: 2vw 0;
+}
+.showcase-item-content {
+  font-size: 1.2em;
+  line-height: 1.4em;
+  margin: 3vw 2vw;
+}

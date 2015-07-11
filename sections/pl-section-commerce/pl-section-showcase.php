@@ -1,7 +1,7 @@
 <?php
 /*
   
-  Plugin Name:    PageLines Section Design Showcase
+  Plugin Name:    PageLines Section Digital Commerce
   Description:    An advanced socialized showcase that allows users to upload submissions to your site. As seen on PageLines.com.
 
   Author:         PageLines
@@ -9,7 +9,7 @@
 
   Version:        5.0.0
   
-  PageLines:      PL_Design_Showcase
+  PageLines:      PL_Digital_Commerce
 
   Filter:         advanced
 
@@ -17,7 +17,7 @@
 
 if( class_exists( 'PageLinesSection' ) ){
 
-class PL_Design_Showcase extends PageLinesSection {
+class PL_Digital_Commerce extends PageLinesSection {
 
   function section_persistent(){
 
@@ -27,9 +27,9 @@ class PL_Design_Showcase extends PageLinesSection {
     $this->page       = $plpg;
 
 
-    $this->config     = new PL_Design_Showcase_Configuration;
+    //$this->config     = new PL_Digital_Commerce_Config;
 
-    add_action( 'pl_rad_profile_additions', array( $this, 'add_to_profile'), 10, 2 );
+
 
   }
 
@@ -456,11 +456,11 @@ class PL_Design_Showcase extends PageLinesSection {
 
 } /** End Section Class **/
 
-if( ! class_exists('PL_Design_Showcase_Configuration') ){
+if( ! class_exists('PL_Digital_Commerce_Config') ){
 
 
 
-class PL_Design_Showcase_Configuration {
+class PL_Digital_Commerce_Config {
 
 
   function __construct() {
@@ -475,8 +475,6 @@ class PL_Design_Showcase_Configuration {
 
 
 
-
-    $this->create_post_type();
 
     add_filter( 'pl_connect_meta_settings_array',             array( $this, 'add_meta_settings' ) ); 
 
@@ -576,81 +574,6 @@ class PL_Design_Showcase_Configuration {
   }
 
   
-
-  function create_post_type(){
-
-    
-
-    register_post_type( $this->pt,
-      array(
-
-        'public'        => true,
-        'has_archive'   => true,
-        'menu_icon'     => 'dashicons-admin-page', 
-        'menu_position' => 5,
-        'rewrite'       => array( 'slug' => $this->rewrite_base . '/items' ),
-        'query_var'     => true,
-        'has_archive'   => true,
-
-        'labels' => array(
-          'name'          => $this->title,
-          'singular_name' => $this->title . __( ' Item' )
-        ),
-        
-        'supports' => array(
-          'title',
-          'excerpt',
-          'editor',
-          'author',
-          'thumbnail'
-        ),
-        'capabilities' => array(
-          'publish_posts'       => 'manage_options',
-          'edit_posts'          => 'manage_options',
-          'edit_others_posts'   => 'manage_options',
-          'delete_posts'        => 'manage_options',
-          'delete_others_posts' => 'manage_options',
-          'read_private_posts'  => 'manage_options',
-          'edit_post'           => 'manage_options',
-          'delete_post'         => 'manage_options',
-          'read_post'           => 'manage_options',
-        ),
-      )
-    );
-
-    $tax_defaults = array(
-      'hierarchical'      => true,
-      'labels'            => array(),
-      'show_ui'           => true,
-      'show_admin_column' => true,
-      'query_var'         => true,
-      'rewrite'           => array( 'slug' => $this->rewrite_base . '/genre' ),
-    );
-
-
-
-    $args = wp_parse_args( array(
-        'labels'  => array(
-                      'name'              => $this->title . __( ' Genres', 'pagelines' ),
-                      'singular_name'     => $this->title . __( ' Genre', 'pagelines' )
-                    ), 
-        'rewrite' => array( 'slug' => $this->rewrite_base . '/genre' )
-      ), $tax_defaults );
-
-    register_taxonomy( $this->tax_cats, array( $this->pt ), $args );
-
-    $args = wp_parse_args( array(
-        'labels'  => array(
-                      'name'              => $this->title . __( ' Tags', 'pagelines' ),
-                      'singular_name'     => $this->title . __( ' Tag', 'pagelines' )
-                    ), 
-        'rewrite' => array( 'slug' => $this->rewrite_base . '/tags' )
-      ), $tax_defaults );
-
-    register_taxonomy( $this->tax_tags, array( $this->pt ), $args );
-
-  }
-
   /*
     When we trash/reject a site, free up the slug so its available next time they submit.
   */

@@ -1,0 +1,114 @@
+// Mixins
+.flex-display(@display: flex) {
+  display: ~"-webkit-@{display}";
+  display: ~"-moz-@{display}";
+  display: ~"-ms-@{display}box"; // IE10 uses -ms-flexbox
+  display: ~"-ms-@{display}"; // IE11
+  display: @display;
+}
+
+.flex-direction(@direction: row) {
+  -webkit-flex-direction: @direction;
+     -moz-flex-direction: @direction;
+      -ms-flex-direction: @direction;
+          flex-direction: @direction;
+}
+
+.justify-content(@justify: center) {
+  -webkit-justify-content: @justify;
+     -moz-justify-content: @justify;
+      -ms-justify-content: @justify;
+          justify-content: @justify;
+}
+
+.flex-vertical(){
+  .flex-display(); 
+  .flex-direction( column );
+  .justify-content( center ); 
+}
+
+
+.pl-showcase-mast{
+  padding: 7vw; 
+
+  h1, h4{
+    margin: 0;
+  }
+  h4{
+    opacity: .5;
+  }
+
+}
+
+.pl-showcase-search{
+  margin-top: 1rem;
+  input{
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,.1);
+    font-size: 1.3em;
+    padding: .5em 1em; 
+    &:focus{
+      background: rgba(255,255,255,.1);
+      border: 1px solid #999;
+      outline: none;
+    }
+  }
+  .search-button{
+    background: none;
+    border: none;
+    position: absolute;
+    right: 0;
+    width: 2em;
+    font-size: 1.6em;
+    opacity: .3;
+    text-align: center;
+    &:hover, {
+      opacity: .5;
+    }
+    &:focus, 
+    &:active{
+      outline: none;
+    }
+  }
+} 
+
+.showcase-sidebar{
+  h3:first-of-type {
+    margin-top: 0;
+  }
+}
+
+
+.showcase-metabar{
+  margin-bottom: 1em; 
+  font-size: .85em;
+  .s-tags{
+    
+    display: inline-block;
+
+    i{
+      margin-right: 3px;
+    }
+    a{
+      color: inherit;
+      margin-right: 5px;
+      text-transform: capitalize;
+      display: inline-block;
+      opacity: .5;
+      &:hover{
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.showcase-actions{
+  padding: 2vw 0;
+}
+
+.showcase-item-content{
+  font-size: 1.2em;
+  line-height: 1.4em;
+  margin: 3vw 2vw;
+}
