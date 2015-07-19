@@ -238,7 +238,7 @@ class PL_Resources extends PageLinesSection {
               <i class="icon icon-search"></i>
             </button>
             <input type="text" name="s" id="search" value="<?php the_search_query(); ?>" placeholder="Search Documentation..." />
-            <?php echo ( pl_is_workarea_iframe() ) ? '<input type="hidden" name="workarea-iframe" value="1"/>' : ''; ?>
+            <?php echo ( pl_is_workarea_iframe() ) ? '<input type="hidden" name="iframe" value="1"/>' : ''; ?>
             <input type="hidden" value="<?php echo $this->pt;?>" name="post_type" id="post_type" />
           </fieldset>
         </form>
