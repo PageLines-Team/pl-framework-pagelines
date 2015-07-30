@@ -193,12 +193,12 @@ $pl_resources_config = new PL_Resources_Config();
  * Only do the rest of PageLines Framework is activated
  * 
  */
-if( ! class_exists( 'PageLinesSection' ) )
+if( ! class_exists( 'PL_Section' ) )
   return;
 
 
 
-class PL_Resources extends PageLinesSection {
+class PL_Resources extends PL_Section {
 
   function section_persistent(){
 
@@ -228,7 +228,7 @@ class PL_Resources extends PageLinesSection {
     ?>
 
     <div class="pl-resources-mast">
-      <div class="pl-content">
+      <div class="pl-content-area">
         <h4><a href="<?php echo get_post_type_archive_link( get_post_type( ) );?>"><?php echo ( ! is_archive() ) ? $pt_name : 'PageLines Framework';?></a></h4>
         <h1><?php (is_archive()) ? post_type_archive_title() : the_title();?></h1>
 
@@ -245,7 +245,7 @@ class PL_Resources extends PageLinesSection {
       </div>
     </div>
     <div class="pl-resources-content">
-      <div class="pl-content">
+      <div class="pl-content-area">
         <div class="row">
           <div class="resources-entry col-sm-9">
             <div class="pad docnav-scan"><?php echo $this->get_content();?></div>

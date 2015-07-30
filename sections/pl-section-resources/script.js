@@ -1,6 +1,6 @@
 !function ($) {
 
-  $( '.section-pl-resources' ).on('template_ready', function(){
+  $( '.pl-sn-resources' ).on('template_ready', function(){
 
     $.plGenerateNav.init( $(this) )
 
