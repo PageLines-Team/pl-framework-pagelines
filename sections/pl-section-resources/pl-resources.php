@@ -318,7 +318,7 @@ class PL_Resources extends PL_Section {
 
         $icon = ( isset($term->meta['icon_slug']) && $term->meta['icon_slug'] != '' ) ? $term->meta['icon_slug'] : 'pagelines';
 
-        $icon = str_replace( 'icon-', '', $icon );
+        $icon = str_replace( 'pl-icon-', '', $icon );
 
         ?>
         <div class="resource-chapter media fix">
