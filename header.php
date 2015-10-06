@@ -1,1 +1,0 @@
-<?php echo pl_get_section( array( 'section' => 'meganav', 'id' => 'anthr', 'settings' => array('logo' => '[pl_logo_url]', 'padding_top' => '.4') ) );
