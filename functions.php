@@ -36,7 +36,7 @@ function enqueue_child_scripts() {
     
   wp_enqueue_script( 'stickykit', get_stylesheet_directory_uri() . '/_plugins/stickykit/stickykit.js' );
 
-  wp_enqueue_script( 'pl-docs', get_stylesheet_directory_uri() . '/script.js' );
+  wp_enqueue_script( 'pl-pagelines-theme', get_stylesheet_directory_uri() . '/pagelines.js' );
   //  wp_enqueue_style( 'pagelines-framework-child', get_stylesheet_directory_uri() . '/build.css' );
 }
 
