@@ -19,6 +19,6 @@ $splashup_settings = array(
 
   ); 
 
-echo pl_get_section( array( 'section' => 'splashup', 'id' => 'homesplash_123', 'settings' => $splashup_settings ) );
+echo pl_get_section( array( 'section' => 'splashup', 'id' => 'homesplash_321', 'settings' => $splashup_settings ) );
 
 
