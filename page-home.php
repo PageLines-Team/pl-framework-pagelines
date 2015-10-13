@@ -9,7 +9,7 @@
 $splashup_settings = array(
 
     'header'                => 'Platform 5', 
-    'subheader'             => 'Insanely-simple design, editing and layout for WordPress.<br/> Coming November 2015.', 
+    'subheader'             => 'Insanely-Simple Editing for WordPress.<br/> Coming November 2015.', 
     'logo'                  => get_stylesheet_directory_uri() . '/images/pl-logo.png', 
     'logo_height'           => '35', 
     'footer_text'           => '&copy; PageLines Inc. 2015', 
