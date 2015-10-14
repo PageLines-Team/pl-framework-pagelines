@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                 <table border="0" cellpadding="10" cellspacing="0" width="100%">
                                                     <tr>
                                                         <td colspan="2" valign="middle" id="credit">
-                                                            <a href="http://www.pagelines.com/"><img style="width: 40px; opacity: .25;" src="<?php echo get_stylesheet_directory_uri() . '/images/pl-leaf.png';?>" /></a>
+                                                            <a style="margin-top: 2em; display: inline-block;" href="http://www.pagelines.com/"><img style="width: 35px;" src="<?php echo get_stylesheet_directory_uri() . '/images/pl-leaf-fade.png';?>" /></a>
                                                         	<?php // echo wpautop( wp_kses_post( wptexturize( apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) ) ) ) ); ?>
                                                         </td>
                                                     </tr>
