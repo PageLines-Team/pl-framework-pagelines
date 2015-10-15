@@ -133,7 +133,7 @@ h3 {
 }
 
 a {
-    color: <?php echo esc_attr( $base ); ?>;
+    color: #0b6bfe;
     font-weight: normal;
     text-decoration: underline;
 }
