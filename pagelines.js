@@ -61,13 +61,24 @@
       })
 
 
-      $('[data-set]').on('keyup.optlstn blur.optlstn change.optlstn paste.optlstn', function(){
+      $('[data-set]').on('keyup.optlstn blur.optlstn change.optlstn paste.optlstn', function(e){
 
           var theInput      = $(this), 
+              theInputType   = theInput.getInputType(),
               theInputID    = theInput.data('set'), 
               UID           = $('.pl-sn-static-content').data('clone'), 
               theValue      = theInput.val()
 
+          /** Certain actions should only be triggered on more occasional change events, as opposed to keyups, etc.. */
+          if( e.type === 'blur' || ( e.type === 'change' && ( theInputType === 'checkbox' || theInputType === 'select' || theInputType === 'radio' || theInputType === 'hidden' ) ) ){
+            $pl().changeEvent = true; 
+            changeEvent = true
+          }
+
+          else {
+            $pl().changeEvent = false; 
+            changeEvent = false
+          } 
 
           $pl().viewModel[ UID ][ theInputID ]( theValue )
       

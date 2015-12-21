@@ -285,7 +285,41 @@ function my_function_name( $response, $data ){
 
 EOT;
 
-echo pl_create_code( $code ); ?>
+echo pl_create_code( $code );
+
+
+$opts[] = array(
+      'type'    => 'text',
+      'key'     => 'list_taxonomy', 
+      'type'    => 'select_wp_tax',
+      'title'   => 'PLCALLBACK'
+  );
+
+ ?>
+
+<div class="docs-example">
+
+  <strong><code>plcallback</code> Data-Bind Example</strong>
+
+  <p>The option will list all taxonomies of a certain type.</p>
+
+  <h4>Taxonomies</h4>
+  <div class="docs-container" data-bind="plcallback: list_taxonomy" data-callback="taxlist">None Selected</div>
+
+  <?php 
+  $taxes = pl_get_taxonomies(); 
+
+  $tax_selects = ''; 
+  foreach( $taxes as $t ){
+
+    $tax_selects .= sprintf('<option value="%s">%s</option>', $t, $t);
+
+  }
+
+  printf('<select data-set="list_taxonomy"><option value="">--Select--</option>%s</select>', $tax_selects);
+  ?>
+
+</div>
 
   <h4><code>plcallback</code> in sections</h4>
 
@@ -424,22 +458,7 @@ echo pl_create_code( $code ); ?>
           
         </ul>
 
-        <h3>Controlling Content Loading</h3>
-        <p>To provide the designer some control as to how PageLines bindings behave on page load we've added the pl-lazy-load helper class.</p>
-        <ul>
-          <li><code>pl-load-lazy</code> This class, if added to the element, will render the binding on initial page load. The default behavior of the callback, shortcode and other server related bindings is to wait for an option to change. (Thie is because they assume a fallback output via PHP). Use this class on the element render on page load instead.</li>
-        </ul>
-
-<?php
-$code = <<<'EOT'
-/**
-*  Example: "Using pl-load-lazy helper"
-*  On page load, use pl-load-lazy class to use an AJAX request to parse the option for shortcodes.
-*/
-<div class="pl-load-lazy" data-bind="plshortcode: my_option_key"></div>
-EOT;
-
-echo pl_create_code( $code ); ?>
+<hr/>
 
         <h3>Dealing with JS Scripts</h3>
 
