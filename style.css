@@ -10,7 +10,7 @@
 
   Template:     pl-framework
 
-  Version:      10.0.6
+  Version:      10.0.7
 
   Text Domain:  pagelines
 
@@ -19,3 +19,54 @@
   Category:     framework, framework-theme, free
 
 */
+.doclist-sidebar {
+  font-size: 14px;
+}
+.doclist-sidebar ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: circle;
+  list-style-position: inside;
+}
+.doclist-sidebar ul > li a {
+  transition: opacity .2s;
+  display: block;
+}
+.doclist-sidebar ul > li a .wrp {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+}
+.doclist-sidebar ul > li > a:active {
+  opacity: .2;
+  transition: opacity 0s;
+}
+.doclist-sidebar ul > li.level2 {
+  margin-top: 1em;
+}
+.doclist-sidebar ul > li.level2 a {
+  line-height: 1.2;
+  font-weight: 600;
+  margin-top: 5px;
+  font-size: 1.1em;
+}
+.doclist-sidebar ul > li.level3 {
+  margin-top: 15px;
+}
+.doclist-sidebar ul > li.level3 + .level3 {
+  margin-top: 0;
+}
+.doclist-sidebar ul > li.level3 a {
+  padding-left: 15px;
+}
+.doclist-sidebar ul > li.level4 a {
+  font-size: 12px;
+  padding-left: 30px;
+}
+.docs-example {
+  padding: 1em 2em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 2em;
+}

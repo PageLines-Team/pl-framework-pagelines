@@ -93,3 +93,47 @@ function pl_list_tax( $response, $data ){
 }
 
 
+function create_docs_template( $content ){  
+
+  global $post;
+  ?>
+
+<div class="pl-content-area pl-content-layout">
+
+  <div class="doclist-container">
+
+    <div class="doclist pl-row">
+    
+      <sidebar class="doclist-sidebar pl-col-sm-3">
+        <h3>Chapters</h3>
+
+        <?php printf( '<ul>%s</ul>',  wp_list_pages( array( 'child_of' => wp_get_post_parent_id( $post->ID ), 'title_li' => '', 'echo' => 0 ) ) ); ?>
+
+        <h3>This Page</h3>
+        <ul class="doclist-nav"></ul>
+
+      </sidebar>
+
+      <div class="doclist-content pl-col-sm-8">    
+        
+        <div class="doclist-content-pad docnav-scan">
+
+          <h1><? echo get_the_title();?></h1>
+        
+          <?php echo $content;?>
+
+        </div>
+
+      </div> 
+
+    </div> 
+
+  </div> 
+
+</div>
+
+
+  <?php 
+
+}
+
