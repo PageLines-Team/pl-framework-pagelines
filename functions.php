@@ -114,11 +114,11 @@ function create_docs_template( $content ){
 
       </sidebar>
 
-      <div class="doclist-content pl-col-sm-8">    
+      <div class="doclist-content pl-col-sm-9">    
         
         <div class="doclist-content-pad docnav-scan">
 
-          <h1><? echo get_the_title();?></h1>
+          <h1><?php echo get_the_title();?></h1>
         
           <?php echo $content;?>
 
