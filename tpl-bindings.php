@@ -8,9 +8,7 @@ global $post;
 
 
 // static options array
-$opts = array(
-
-);
+$opts = array();
 
 // lets buffer and output everything at the end
 ob_start();
