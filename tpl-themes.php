@@ -29,7 +29,7 @@ ob_start();
 
 <hr />
 
-<h3>Theme Structure</h3>
+<h2>Theme Structure</h2>
 
 <p>For most use scenarios, it is likely preferable to create a PageLines Framework child theme as opposed to a new base theme to work with Platform 5.</p>
 
@@ -79,7 +79,7 @@ echo pl_create_code( $code ); ?>
 
 <hr />
 
-<h2>Theme Head &amp; Footer</h2>
+<h3>Theme Head &amp; Footer</h3>
 
 <p>If you are creating a new parent theme, you will need to add a special hook to your header.php and footer.php to enable your theme header and footer with drag and drop functionality. Luckily this is simple. </p>
 
@@ -108,7 +108,7 @@ echo pl_create_code( $code ); ?>
 <strong>Note:</strong> Page templates in use with Platform do NOT require you include the <code>get_header()</code> and <code>get_footer()</code> functions.
 </p>
 
-<h2>Adding Real Time Options</h2>
+<h3>Adding Real Time Options</h3>
 
 <p>Options can be added onto the 'content section' on any page template using Platform 5. To do this simply pass in an option array to the <code>pl_add_static_settings()</code> function and then use PageLines bindings to render them in the template. Here is an example from the 404 template in PageLines Framework:</p>
 
@@ -150,7 +150,7 @@ EOT;
 
 echo pl_create_code( $code ); ?>
 
-<h2>Including Sections In Templates</h2>
+<h3>Including Sections In Templates</h3>
 
 <p>To make use of full section designs within page templates, PageLines provides some simple utitilies to make including them and setting their defaults easy.</p>
 
