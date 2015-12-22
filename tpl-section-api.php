@@ -10,7 +10,7 @@ ob_start();
 
 <h2>Introduction</h2>
 
-<p>PageLines Section system allows developers to use their imagination in creating their own unique sections. These sections can add extra functionality to your site can can also be packaged and given away (or sold) to other PageLines users.</p>
+<p>PageLines Section system allows developers to use their imagination in creating their own unique sections. These sections can add extra functionality and can also be packaged and given away (or sold) to other PageLines users.</p>
 
 <p>Using this 'API', you can define what kind of content the sections load on the page, and use the option engine to add options directed at that particular sections.</p>
 
