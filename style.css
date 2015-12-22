@@ -10,7 +10,7 @@
 
   Template:     pl-framework
 
-  Version:      10.0.8
+  Version:      10.0.9
 
   Text Domain:  pagelines
 
@@ -29,6 +29,7 @@
   list-style-position: inside;
 }
 .doclist-sidebar ul > li a {
+  color: inherit;
   transition: opacity .2s;
   display: block;
 }
