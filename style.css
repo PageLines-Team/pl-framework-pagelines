@@ -10,7 +10,7 @@
 
   Template:     pl-framework
 
-  Version:      10.0.9
+  Version:      10.0.10
 
   Text Domain:  pagelines
 
@@ -70,4 +70,39 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   margin-bottom: 2em;
+}
+.grid-example .wrap {
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  outline: 1px solid #eee;
+  background-color: rgba(0, 0, 0, 0.03);
+  margin-bottom: 10px;
+}
+.btns-example span {
+  display: inline-block;
+  margin: 10px;
+}
+.scheme-example {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2em;
+  margin: 1em 0;
+}
+.scheme-example .header {
+  font-size: 1.6em;
+}
+.scheme-example.pl-scheme-light {
+  background: rgba(0, 0, 0, 0.35);
+}
+.alignment-examples > div {
+  outline: 1px solid #eee;
+  margin-bottom: 1em;
+  padding: 10px 30px;
+}
+.icons-examples {
+  text-align: center;
+}
+.icons-examples i {
+  margin: 15px;
 }
