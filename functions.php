@@ -92,6 +92,11 @@ function pl_list_tax( $response, $data ){
   return $response;
 }
 
+add_action( 'after_setup_theme', 'pl_register_menu_locations' );
+function pl_register_menu_locations() {
+  register_nav_menu( 'developer', __( 'Developer Docs', 'theme-slug' ) );
+}
+
 
 function create_docs_template( $content ){  
 
@@ -107,7 +112,14 @@ function create_docs_template( $content ){
       <sidebar class="doclist-sidebar pl-col-sm-3">
         <h3>Chapters</h3>
 
-        <?php printf( '<ul>%s</ul>',  wp_list_pages( array( 'child_of' => wp_get_post_parent_id( $post->ID ), 'title_li' => '', 'echo' => 0 ) ) ); ?>
+        <?php 
+          if( has_nav_menu( 'developer' ) ) {
+            echo wp_nav_menu( array( 'theme_location' => 'developer' ) );
+          }
+          else{
+            printf( '<ul>%s</ul>',  wp_list_pages( array( 'child_of' => wp_get_post_parent_id( $post->ID ), 'title_li' => '', 'echo' => 0 ) ) ); 
+          }
+          ?>
 
         <h3>This Page</h3>
         <ul class="doclist-nav"></ul>
