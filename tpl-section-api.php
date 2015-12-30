@@ -273,6 +273,44 @@ echo pl_create_code( $code ); ?>
 
 <p>Bindings are very powerful and are fully covered in their own document within PageLines developer docs.</p>
 
+<h3>Nested Sections</h3>
+
+<p>Sections can also allow for sections to be nested inside of them. In other words, sections can contain other sections.</p>
+
+<p>And do enable this within a section only requires two lines of code! They are: </p>
+
+<ul>
+  <li>A section header of <code>Contain: yes</code></li>
+  <li>The function <code>pl_nested_container( $this );</code> inside of <code>section_template</code></li>
+</ul>
+
+<p>Something like this:</p>
+
+<?php
+$code = <<<'EOT'
+
+<?php
+/*
+  Plugin Name: My Section
+  (other headers)
+  Contain:      yes
+*/
+
+class PL_Section_MySection extends PL_Section {
+
+  function section_template(){ ?>
+    <div class="my-other-section-stuff">
+        <?php pl_nested_container( $this ); // render nested sections ?>
+      </div>
+    </div>
+  <?php 
+  }
+}
+EOT;
+
+echo pl_create_code( $code ); ?>
+
+
 <h2>Other Methods</h2>
 
 <h3>Section Head</h3>
