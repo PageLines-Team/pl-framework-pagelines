@@ -233,8 +233,8 @@ $code = <<<'EOT'
 $options[] = array(
     'type'    => 'select', 
     'opts'    => array(
-        'value_1'  => array( name => "Option 1 Text"),
-        'value_2'  => array( name => "Option 2 Text")
+        'value_1'  => array( 'name' => "Option 1 Text"),
+        'value_2'  => array( 'name' => "Option 2 Text")
       )
     // Other parameters
   ); 
