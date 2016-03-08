@@ -34,9 +34,9 @@ function pl_add_syntax_highlighting(){
 add_action( 'wp_enqueue_scripts', 'enqueue_child_scripts' );
 function enqueue_child_scripts() {
     
-  wp_enqueue_script( 'stickykit', get_stylesheet_directory_uri() . '/_plugins/stickykit/stickykit.js' );
+  pl_script( 'stickykit', get_stylesheet_directory_uri() . '/_plugins/stickykit/stickykit.js', array('jquery'), false, true );
 
-  wp_enqueue_script( 'pl-pagelines-theme', get_stylesheet_directory_uri() . '/pagelines.js' );
+  pl_script( 'pl-pagelines-theme', get_stylesheet_directory_uri() . '/pagelines.js', array('jquery'), false, true );
   //  wp_enqueue_style( 'pagelines-framework-child', get_stylesheet_directory_uri() . '/build.css' );
 }
 
@@ -148,4 +148,3 @@ function create_docs_template( $content ){
   <?php 
 
 }
-
