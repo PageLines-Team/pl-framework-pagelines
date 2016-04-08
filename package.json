@@ -25,7 +25,8 @@
     "!.gitignore",
     "!**/node_modules/**",
     "!package.json",
-    "!DS_Store"
+    "!DS_Store",
+    "!build.less"
   ],
   "devDependencies": {
     "grunt": "~0.4.5",
