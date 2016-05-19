@@ -268,13 +268,13 @@ EOT;
 
 echo pl_create_code( $code ); ?>
 
-<h4><code>select_count</code></h4>
+<h4><code>count_select</code></h4>
 <p>Uses count parameters to create a numerical selector</p>
 <?php
 $code = <<<'EOT'
-// "select_count" option type
+// "count_select" option type
 $options[] = array(
-    'type'          => 'select_count',
+    'type'          => 'count_select',
     'count_start'   => 5,     // Count starts at this value
     'count_mult'    => 5,     // Count between each option
     'count_number'  => 200,   // Count total
