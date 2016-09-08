@@ -41,14 +41,14 @@ ob_start();
 
 <?php
 $code = <<<'EOT'
-/** 
+/**
  * Include extra scripts and styles here
  * Use the pl_script and pl_style functions (which enqueues the files)
  */
 function section_styles(){
 
   /** Include the sample script */
-  pl_script( $this->id, $this->base_url . '/starter.js' );
+  pl_script( $this->id, plugins_url( 'starter.js', __FILE__ ) );
 
 }
 EOT;
@@ -97,10 +97,10 @@ $code = <<<'EOT'
         .not('.loaded')
         .addClass('do-something-here')  // Here is where you'd apply any scripts
         .addClass('loaded')             // Use a loaded class to prevent things triggering multiple times ()
-      
+
     }
   }
-  
+
 /** end of jQuery wrapper */
 }(window.jQuery);
 EOT;
@@ -113,8 +113,8 @@ echo pl_create_code( $code ); ?>
 
 <p>A common example might be the wording inside a slide from a rendered section, this will require a rerender because the users won't see the change until it is rerendered.</p>
 
-<?php 
+<?php
 
-$the_page = ob_get_clean(); 
+$the_page = ob_get_clean();
 
 echo create_docs_template( $the_page );

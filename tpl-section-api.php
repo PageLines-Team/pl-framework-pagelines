@@ -88,7 +88,7 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 <?php
 
-/* 
+/*
   Plugin Name:    PageLines Section My Section
   Version:        5.0.0
   PageLines:      PL_My_Section_Class
@@ -110,7 +110,7 @@ class PL_My_Section_Class extends PL_Section {
 
   /** This method should return an options configuration array for the section */
   function section_opts(){ return array(); }
-  
+
   /** This is the HTML output that shows on the page for the section */
   function section_template(){ // HTML here }
 
@@ -146,15 +146,15 @@ echo pl_create_code( $code ); ?>
 
 <?php
 $code = <<<'EOT'
-function section_styles(){ 
+function section_styles(){
 
   // pl_script( 'unique_id', 'http://url_to_file.js' );
   // pl_style(  'unique_id', 'http://url_to_file.css' );
 
-  pl_script(  $this->id,          $this->base_url.'/pl.popthumbs.js' );
+  pl_script(  $this->id,          plugins_url( 'pl.popthumbs.js', __FILE__ ) );
 
-  pl_script(  'prettyphoto',      $this->base_url.'/prettyphoto.min.js' );
-  pl_style(   'prettyphoto-css',  $this->base_url.'/prettyPhoto/css/prettyPhoto.css' );
+  pl_script(  'prettyphoto',      plugins_url( 'prettyphoto.min.js', __FILE__ ) );
+  pl_style(   'prettyphoto-css',  plugins_url( 'prettyPhoto/css/prettyPhoto.css', __FILE__ ) );
 
 }
 EOT;
@@ -168,16 +168,16 @@ echo pl_create_code( $code ); ?>
 
 <?php
 $code = <<<'EOT'
-function section_persistent(){ 
+function section_persistent(){
 
-  add_filter('the_content', array($this, 'adjust_content')); 
+  add_filter('the_content', array($this, 'adjust_content'));
 
 }
 
 function adjust_content( $content ){
-  
-  // do something... 
-  
+
+  // do something...
+
   return $content;
 }
 EOT;
@@ -215,7 +215,7 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 // This will be output wherever the section is located on the page.
 function section_template(){ ?>
- 
+
  <div class="my-element">Some Text</div>
 
 <?php }
@@ -231,7 +231,7 @@ echo pl_create_code( $code ); ?>
 
 <?php
 $code = <<<'EOT'
-function section_options(){ 
+function section_options(){
 
   $options = array();
 
@@ -239,9 +239,9 @@ function section_options(){
       'type'    => 'text,             // type of option
       'key'     => 'my_unique_key',   // the unique key for option, referred to in HTML bindings
       'title'   => 'My Option Title', // Title for option UI
-      'help'    => 'Any help for the user', 
-      'label'   => 'Option Label', 
-    ); 
+      'help'    => 'Any help for the user',
+      'label'   => 'Option Label',
+    );
 
   return $options;
 }
@@ -303,7 +303,7 @@ class PL_Section_MySection extends PL_Section {
         <?php pl_nested_container( $this ); // render nested sections ?>
       </div>
     </div>
-  <?php 
+  <?php
   }
 }
 EOT;
@@ -315,15 +315,15 @@ echo pl_create_code( $code ); ?>
 
 <h3>Section Head</h3>
 
-<p>If you'd like to output raw HTML into the head of your HTML document (if the section is one the page) then you'll want to use the <code>section_head</code> method.</p> 
+<p>If you'd like to output raw HTML into the head of your HTML document (if the section is one the page) then you'll want to use the <code>section_head</code> method.</p>
 
 <?php
 $code = <<<'EOT'
 function section_head(){
-  // This will out put in between your sites <head> tags. 
-  // For example, adding javascript: 
+  // This will out put in between your sites <head> tags.
+  // For example, adding javascript:
   ?>
-  
+
   <script>
   jQuery(window).ready(function() {
     // Javascript could go here.
@@ -337,11 +337,11 @@ echo pl_create_code( $code ); ?>
 
 <h3>Section Foot</h3>
 
-<p>Likewise if you'd like to output HTML specifically in the page footer. You'll want to use the <code>section_foot</code> method.</p> 
+<p>Likewise if you'd like to output HTML specifically in the page footer. You'll want to use the <code>section_foot</code> method.</p>
 
 
-<?php 
+<?php
 
-$the_page = ob_get_clean(); 
+$the_page = ob_get_clean();
 
 echo create_docs_template( $the_page );
