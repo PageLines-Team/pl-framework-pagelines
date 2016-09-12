@@ -14,7 +14,7 @@ ob_start();
 
 <p>To get around this problem, PageLines has engineered some utilities to. Specifically, trigger classes and simple rerendering functions.</p>
 
-<h3>How is works</h3>
+<h3>How it works</h3>
 
 <p>The basic process for working with javascript elements works like this:</p>
 
