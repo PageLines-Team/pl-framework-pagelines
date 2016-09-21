@@ -7,7 +7,7 @@
 ob_start();
  ?>
 
-  
+
   <h2>Introduction</h2>
     <p>Options inside of Platform 5 are driven by a very simple PHP options array format.</p>
 
@@ -29,18 +29,18 @@ class My_Section extends PL_Section {
 
   /** Option array method (returns options) */
   function section_opts(){
-    
+
     // Setup Option Array
 
-    $options = array(); 
+    $options = array();
 
     $options[] = array(
         'type'    => 'text,             // type of option
         'key'     => 'my_unique_key',   // the unique key for option, referred to in HTML bindings
         'title'   => 'My Option Title', // Title for option UI
-        'help'    => 'Any help for the user', 
-        'label'   => 'Option Label', 
-      ); 
+        'help'    => 'Any help for the user',
+        'label'   => 'Option Label',
+      );
 
 
     return $options;
@@ -52,13 +52,13 @@ class My_Section extends PL_Section {
     ?>
     <!-- This will sync its text to value of the option -->
     <div data-bind="pltext: my_unique_key"></div>
-    <?php 
+    <?php
 
   }
 }
 EOT;
 
-echo pl_create_code( $code ); 
+echo pl_create_code( $code );
 
 ?>
 
@@ -72,18 +72,18 @@ $code = <<<'EOT'
  * Template Name: My Template
  */
 
-$options = array(); 
+$options = array();
 
 $options[] = array(
     'type'    => 'text,             // type of option
     'key'     => 'my_unique_key',   // the unique key for option, referred to in HTML bindings
     'title'   => 'My Option Title', // Title for option UI
-    'help'    => 'Any help for the user', 
-    'label'   => 'Option Label', 
-  ); 
+    'help'    => 'Any help for the user',
+    'label'   => 'Option Label',
+  );
 
 // Adds options to the template
-pl_add_static_settings( $options ); 
+pl_add_static_settings( $options );
 
 ?>
 <!-- This will sync its text to value of the option -->
@@ -103,7 +103,7 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 // Standard Option Parameters
 $options[] = array(
-    'type'    => 'text,                 // Type of option    
+    'type'    => 'text,                 // Type of option
     'key'     => 'my_unique_key',       // Unique key
     'default' => 'Hello!',              // The default option value
     'title'   => 'My Option Title',     // UI Title
@@ -111,10 +111,29 @@ $options[] = array(
     'ref'     => 'Help in a dropdown',  // Dropdown Help
     'label'   => 'Option Label',        // Label for Option
     'opts'    => array()                // Sub options (used in selects, accordion, multi),
-    'stylize' => 'custom-class'         // Add a custom class to the option (for styling) 
-); 
+    'stylize' => 'custom-class'         // Add a custom class to the option (for styling)
+);
 EOT;
 
+echo pl_create_code( $code ); ?>
+
+<h3>Overriding Section Options</h3>
+
+<p>Every section option can be overridden at runtime using WordPress filters.</p>
+<p>In this example we are going to set the posts_per_page section option for postgrid to 48 posts, the maximum the section allows is 32.</p>
+<?php
+$code = <<<'EOT'
+class Postgrid_Posts {
+
+  function __construct() {
+    add_filter( 'pl_opt-posts_per_page', array( $this, 'filter' ) );
+  }
+  function filter( $var ) {
+    return 48;
+  }
+}
+new Postgrid_Posts;
+EOT;
 echo pl_create_code( $code ); ?>
 
 <h2>Option Types</h2>
@@ -129,19 +148,19 @@ $code = <<<'EOT'
 // "multi" option type
 // This will have two nested text options within the top level option
 $options[] = array(
-    'type'    => 'multi', 
+    'type'    => 'multi',
     'opts'    => array(
         array(
             'type'  => 'text',
             'key'   => 'k1'
-          ), 
+          ),
         array(
             'type'  => 'text',
             'key'   => 'k2'
-          ), 
+          ),
       )
     // Other parameters
-  ); 
+  );
 EOT;
 
 echo pl_create_code( $code ); ?>
@@ -155,15 +174,15 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 // "text" option type
 $options[] = array(
-    'type'    => 'text, 
+    'type'    => 'text,
     // Other parameters
-  ); 
+  );
 
 // "textarea" option type
 $options[] = array(
     'type'    => 'textarea,
     // Other parameters
-  ); 
+  );
 EOT;
 
 echo pl_create_code( $code ); ?>
@@ -174,9 +193,9 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 // "text" option type
 $options[] = array(
-    'type'    => 'richtext, 
+    'type'    => 'richtext,
     // Other parameters
-  ); 
+  );
 EOT;
 
 echo pl_create_code( $code ); ?>
@@ -187,9 +206,9 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 // "image_upload" option type
 $options[] = array(
-    'type'    => 'image_upload', 
+    'type'    => 'image_upload',
     // Other parameters
-  ); 
+  );
 EOT;
 
 echo pl_create_code( $code ); ?>
@@ -231,13 +250,13 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 // "image_upload" option type
 $options[] = array(
-    'type'    => 'select', 
+    'type'    => 'select',
     'opts'    => array(
         'value_1'  => array( 'name' => "Option 1 Text"),
         'value_2'  => array( 'name' => "Option 2 Text")
       )
     // Other parameters
-  ); 
+  );
 EOT;
 
 echo pl_create_code( $code ); ?>
@@ -248,9 +267,9 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 // "select_icon" option type
 $options[] = array(
-    'type'    => 'select_icon', 
+    'type'    => 'select_icon',
     // Other parameters
-  ); 
+  );
 EOT;
 
 echo pl_create_code( $code ); ?>
@@ -261,9 +280,9 @@ echo pl_create_code( $code ); ?>
 $code = <<<'EOT'
 // "select_menu" option type
 $options[] = array(
-    'type'    => 'select_menu', 
+    'type'    => 'select_menu',
     // Other parameters
-  ); 
+  );
 EOT;
 
 echo pl_create_code( $code ); ?>
@@ -281,7 +300,7 @@ $options[] = array(
     'suffix'        => 'px',  // Suffix added to option text
     'default'       => 10,
     // Other parameters
-  ); 
+  );
 EOT;
 
 echo pl_create_code( $code ); ?>
@@ -295,19 +314,19 @@ $code = <<<'EOT'
 // "accordion" option type
 $options[] = array(
   'key'       => 'my_accordion_key',
-  'type'      => 'accordion', 
-  'title'     => __('Item Setup', 'pagelines'), 
+  'type'      => 'accordion',
+  'title'     => __('Item Setup', 'pagelines'),
   'opts'  => array(
     array(
       'key'      => 'title',
       'label'    => __( 'Title', 'pagelines' ),
-      'type'    => 'text', 
+      'type'    => 'text',
       'default'  => 'Hello'
     ),
     array(
       'key'      => 'text',
       'label'    => __( 'Text', 'pagelines' ),
-      'type'    => 'richtext', 
+      'type'    => 'richtext',
       'default'  => 'This is a box.'
     ),
 
@@ -394,8 +413,8 @@ $code = <<<'EOT'
 
 $options[] = array(
   'key'       => 'my_accordion_key',
-  'type'      => 'accordion', 
-  'title'     => __('Item Setup', 'pagelines'), 
+  'type'      => 'accordion',
+  'title'     => __('Item Setup', 'pagelines'),
   'opts'  => array(
     pl_std_opt('text'),
     pl_std_opt('button'),
@@ -425,7 +444,7 @@ $options[] = array(
     'title'      => __( 'Primary Button', 'pagelines' ),
     'type'       => 'multi',
     'stylize'    => 'button-config',
-    'opts'        => pl_button_link_options( 'button_primary', array( 
+    'opts'        => pl_button_link_options( 'button_primary', array(
       'button_primary'        => '#',     // Default URL
       'button_primary_text'   => 'More',  // Default Text
       'button_primary_size'   => 'lg'     // Default Size
@@ -439,7 +458,7 @@ echo pl_create_code( $code ); ?>
 
 <?php
 
-$the_page = ob_get_clean(); 
+$the_page = ob_get_clean();
 
 
 echo create_docs_template( $the_page );
